@@ -1,0 +1,140 @@
+{% extends 'layout.html' %}
+
+{% block page_css %}
+    <link href="{{ url_for('static', filename='css/profilepage.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block page_script %}
+<script>
+var modal = document.getElementById('editModal');
+var btn = document.getElementById('openEditForm');
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block"
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+{% endblock %}
+
+{% block pageContent %}
+    <div class="profile-info-wrapper">
+        <div class="profile-info">
+            <img class = "profile-img" src="{{ userProfilePicture }}">
+            <div class="profile-info-body">
+                <h2 class="profile-username">
+                    @{{ targetUser.username }}
+                    {% if canEdit == True %}
+                        <a id="openEditForm"><i class="fas fa-user-edit"></i></a>
+                    {% endif %}
+                </h2>
+                <p class="profile-name">{{ targetUser.first }} {{ targetUser.last }}</p>
+                {% if targetUser.bio != None %}
+                    <p class="profile-bio">{{ targetUser.bio }}</p>
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if canEdit == True %}
+    <!--EDIT PROFILE MODAL-->
+    <div id="editModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="form-wrapper">
+                <form method = "POST" action="{{ url_for('profile', username=current_user.username) }}" class="signup-form">                
+                    {{ form.csrf_token }}
+                    <fieldset class="picture">
+                        {{ form.picture.label }}
+                        {{ form.picture }}
+                        {% if form.picture.errors %}
+                            <ul class="errors">
+                                {% for error in form.picture.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </fieldset>
+                    <fieldset class="first">
+                        {{ form.first.label }}
+                        {{ form.first }}
+                        {% if form.first.errors %}
+                        <ul class="errors">
+                            {% for error in form.first.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </fieldset>
+                    <fieldset class="last">
+                        {{ form.last.label }}
+                        {{ form.last }}
+                        {% if form.last.errors %}
+                        <ul class="errors">
+                            {% for error in form.last.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </fieldset>
+                    
+                    <fieldset class="username">
+                        {{ form.username.label }}
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                        <ul class="errors">
+                            {% for error in form.username.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </fieldset>
+                    <fieldset class="email">
+                        {{ form.email.label }}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <ul class="errors">
+                            {% for error in form.email.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </fieldset>   
+                    <fieldset class="form-field">
+                        {{ form.bio.label }}
+                        {{ form.bio(rows=5) }}
+                        {% if form.bio.errors %}
+                        <ul class="errors">
+                            {% for error in form.bio.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </fieldset>         
+                    <div class="submit-btn">
+                        {{ form.submit }}
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="centered-intro">
+        <h1>{{ targetUser.first }}'s Garage</h1>
+        <p>It seems {{ targetUser.first }}'s garage is empty...</p>
+    </div>
+{% endblock %}

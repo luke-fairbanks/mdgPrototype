@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<header>
+    <nav>
+        <img src="../static/img/personaluniverselogo.png">
+
+        <div class="link-container">
+        {% for link in nav %}
+            {% if request.path == link.url %}
+                <a class="active_page" href="{{ link.url }}">{{ link.name }}</a>
+            {% else %}
+                <a class="navbar-link" href="{{ link.url }}">{{ link.name }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if current_user.is_authenticated %}
+            {% if request.path == url_for('profile', username=current_user.username) %}
+                <a class="active_page" href="{{ url_for('profile', username=current_user.username) }}">Your Garage</a>
+            {% else %}
+                <a class="navbar-link" href="{{ url_for('profile', username=current_user.username) }}">Your Garage</a>
+            {% endif %}
+            <a class="navbar-link" href='/logout'><i class="fas fa-sign-out-alt"></i></a>
+        {% else %}
+            <a class="navbar-link" href="{{ url_for('auth_bp.login') }}">Log In</a>
+        {% endif %}
+        </div>
+    </nav>
+</header>

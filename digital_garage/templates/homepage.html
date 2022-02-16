@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+{% block page_css %}
+    <link href="{{ url_for('static', filename='css/homepage.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block page_script %} 
+<!--<script type="module" src="{{ url_for('static', filename='scripts/homepage.js') }}"></script>-->
+<!--<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>-->
+<script>
+//scroll to top
+$(window).scrollTop(0);
+//load on interaction
+const body = document.body;
+let loaded = false;
+
+const onInteraction = () => {
+    if (loaded === true) {
+        return;
+    }
+    loaded = true;
+
+    const modelViewer = document.createElement('script'); 
+    modelViewer.type = 'module';
+    modelViewer.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js'; 
+    body.appendChild(modelViewer);
+
+    const focusVisible = document.createElement('script');
+    focusVisible.src = 'https://unpkg.com/focus-visible/dist/focus-visible.js'; 
+    body.appendChild(focusVisible);
+};
+
+body.addEventListener('mouseover', onInteraction, {once:true});
+body.addEventListener('touchmove', onInteraction, {once:true});
+body.addEventListener('scroll', onInteraction, {once:true});
+body.addEventListener('keydown', onInteraction, {once:true});
+//LOADING SCREEN ANIMATION
+$(window).load(function() {
+    setTimeout(function(){
+        $("#loading-txt").fadeOut(complete=txtChangeFadeIn);
+    }, 1500);
+    function txtChangeFadeIn(){
+        document.getElementById("loading-txt").textContent="welcome";
+        $("#loading-txt").removeClass("loading")
+        setTimeout(function() {
+            $("#loading-txt").fadeIn(complete=garageDoorSlideUp);
+        }, 500)    
+    };
+    function garageDoorSlideUp(){
+        setTimeout(function(){
+            $("#garage-door-loader").animate({top: '-900px'}, 'slow');
+            document.getElementsByTagName("html")[0].style = 'overflow-y: visible';
+        }, 2500)
+
+        setTimeout(function(){
+            $("#garage-door-loader").addClass('gone')
+        }, 8000)
+    }
+})
+</script>
+{% endblock %}
+
+{% block pageContent %}
+    <div class="garage-door-loader" id="garage-door-loader">
+        <p id="loading-txt" class="text">loading</p>
+        <img id="loading-img" src="../static/img/garage door.jpeg" alt="">
+    </div>
+    <div class="landing-split-container" style="background-image:url(../static/img/garage2.jpeg)">
+        <div class="column left">
+            <h1>{{title}}</h1>
+            <p>{{description}}</p>
+        </div>
+    
+        <div class="column right">
+            <!-- 3D object-->
+            <!--<model-viewer src="../static/assets/car_models/free_1975_porsche_911_930_turbo/scene.gltf" alt="Car" auto-rotate ar ios-src="../static/assets/car_models/free_1975_porsche_911_930_turbo/scene.gltf"></model-viewer>-->
+            <model-viewer src="../static/assets/free_1972_datsun_240k_gt/scene.gltf" camera-orbit="30deg 75deg 105%" auto-rotate alt="Car" ar ios-src="../static/assets/free_1972_datsun_240k_gt/scene.gltf"></model-viewer>
+            <!--<canvas id="landing-car"></canvas>-->
+        </div>
+    
+    </div>
+    <div class="call-to-action-wrapper">
+        <model-viewer 
+        camera-orbit="calc(3.5rad + env(window-scroll-y) * 2rad) calc(50deg + env(window-scroll-y) * 40deg) calc(6m - env(window-scroll-y) * 1.5m)" 
+        camera-target="auto auto 1m"
+        src="../static/assets/car_models/free_1975_porsche_911_930_turbo/scene.gltf" 
+        alt="Porsche 911 Turbo Model"
+        ></model-viewer>
+        <div class="call-to-action-text">
+            <div class = "call-to-action">
+                <h1>Join us!</h1>
+                <p>Start buying, selling, and creating NFT's, in your own Digital Garage!</p>
+                <a href="{{ url_for('auth_bp.signup') }}"><button type="button" class="btnFill">Sign Up</button></a>
+            </div>
+        </div>
+    </div>
+    <div style="height: 50vh;">
+        <ul>
+            <li>Bruh</li>
+            <li>hehe</li>
+        </ul>
+    </div>
+{% endblock %}
+

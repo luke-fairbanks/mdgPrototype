@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block pageContent %}
+<div class="centered-intro">
+    <h1>{{title}}</h1>
+</div>
+
+<div class="form-wrapper">
+    <form method = "POST" action="{{ url_for('auth_bp.login') }}" class="login-form">
+        <div class="login-signup-split">
+            <a class="tab link tab-right" href="{{ url_for('auth_bp.signup') }}">Sign Up</a>
+            <div class="tab active-left tab-left">Log In</div>
+
+        </div>
+        {{ form.csrf_token }}
+
+        <fieldset class="email">
+            {{ form.email.label }}
+            {{ form.email }}
+            {% if form.email.errors %}
+            <ul class="errors">
+                {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </fieldset>
+        <fieldset class="password">
+            {{ form.password.label }}
+            {{ form.password }}
+            {% if form.password.errors %}
+            <ul class="errors">
+                {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </fieldset>
+        <div class="submit-btn">
+            {{ form.submit }}
+        </div>
+    </form>
+    <div class="alternative-option">
+        <span>Don't have an account yet?</span>
+        <a href="{{ url_for('auth_bp.signup') }}">Sign up!</a>
+    </div>
+
+</div>
+
+{% endblock %}

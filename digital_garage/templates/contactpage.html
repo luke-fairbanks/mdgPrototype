@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block page_css %}
+    <link href="{{ url_for('static', filename='css/contactpage.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block pageContent %}
+    <div class="centered-intro">
+        <h1>{{title}}</h1>
+        <p>{{description}}</p>
+    </div>
+    <div class="split-page">
+        <div class="email-icon left">
+            <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <div class="form-wrapper right">
+            <form method = "POST" action="{{ url_for('contact') }}" class="contact-form">
+                {{ form.csrf_token }}
+
+                <fieldset class="form-field">
+                    {{ form.name.label }}
+                    {{ form.name(size=20) }}
+                    {% if form.name.errors %}
+                    <ul class="errors">
+                        {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                </fieldset>
+
+                <fieldset class="form-field">
+                    {{ form.email.label }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <ul class="errors">
+                            {% for error in form.email.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </fieldset>
+
+                <fieldset class="form-field">
+                    {{ form.body.label }}
+                    {{ form.body(rows=10) }}
+                    {% if form.body.errors %}
+                    <ul class="errors">
+                        {% for error in form.body.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                </fieldset>
+
+                {{ form.submit }}
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
