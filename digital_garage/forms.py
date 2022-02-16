@@ -4,7 +4,6 @@ from email import message
 from random import choices
 from unicodedata import name
 
-from matplotlib.pyplot import title
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, SubmitField, PasswordField, DateField, SelectField,TextAreaField
