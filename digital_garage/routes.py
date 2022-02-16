@@ -2,7 +2,6 @@ from fileinput import filename
 
 import os
 import secrets
-from matplotlib.pyplot import title
 from flask import current_app as app
 from flask import Flask, url_for, render_template, redirect, flash, make_response, Blueprint, request
 from .email import send_email
