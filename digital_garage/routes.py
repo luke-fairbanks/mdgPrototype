@@ -23,7 +23,7 @@ def home():
     return render_template(
         'homepage.html',
         nav=nav,
-        title="Digital Garage Com.",
+        title="Digital Garage Co.",
         description='Welcome to the gateway to your digital garage.',
     )
 
