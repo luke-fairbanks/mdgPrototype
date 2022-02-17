@@ -54,8 +54,9 @@ def save_profile_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/img/profile-images/', picture_fn)
+    picture_path = os.path.join(app.instance_path, 'static/img/profile-images/', picture_fn)
     form_picture.save(picture_path)
+    print("Picture is save at {}".format(picture_path))
     
     return picture_fn
 
@@ -73,6 +74,7 @@ def profile(username):
                     if form.picture.data:
                         picture_file = save_profile_picture(form.picture.data)
                         current_user.profile_picture = picture_file
+                        print("user profile picture saved!")
                     current_user.first = form.first.data
                     current_user.last = form.last.data
                     current_user.username = form.username.data
@@ -116,11 +118,11 @@ def logout():
 #handle errors
 
 @app.errorhandler(404)
-def not_found():
+def not_found(self):
     global nav
     #Page not found.
     return make_response(
-        render_template("404.html",        
+        render_template("errorPages/404.html",        
         title="We had trouble locating that page",
         nav=nav
         ),

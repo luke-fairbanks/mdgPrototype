@@ -39,7 +39,7 @@ class User(UserMixin, db.Model):
     profile_picture = db.Column(
         db.String(20),
         unique = False,
-        nullable=False,
+        nullable=True,
         default='default.jpg'
     )
     password = db.Column(
