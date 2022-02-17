@@ -4,7 +4,6 @@ from email import message
 from random import choices
 from unicodedata import name
 
-from matplotlib.pyplot import title
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, SubmitField, PasswordField, DateField, SelectField,TextAreaField
@@ -73,7 +72,10 @@ class SignupForm(FlaskForm):
             EqualTo('password', message='Passwords must match')
         ],render_kw={"placeholder": "don't mess this up"}
     )
-    dateOfBirth = DateField('Date of Birth')
+    dateOfBirth = DateField(
+        'Date of Birth',
+        render_kw={"placeholder": "yyyy-mm-dd"}
+    )
     submit = SubmitField('Register')
 
 class LoginForm(FlaskForm):
