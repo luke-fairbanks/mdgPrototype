@@ -32,7 +32,9 @@ html, body {
 model-viewer::part(default-progress-mask) {
     display: none;
   }
-
+model-viewer {
+    --poster-color: transparent;
+  }
 .landing-split-container{
     height: 70vh;
     background-repeat: no-repeat;
