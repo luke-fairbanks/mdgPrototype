@@ -8,7 +8,58 @@
 <!--<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>-->
 <script>
 //scroll to top
-$(window).scrollTop(0);
+if ($(window).scrollTop() === 0) {
+    //Garage door slide up 
+    setTimeout(function(){
+        $("#garage-door-loader").animate({top: '-900px'}, 'slow');
+    }, 500);
+    setTimeout(function(){
+        $("#garage-door-loader").addClass('gone')
+    }, 3000)
+} else{
+    $("#garage-door-loader").addClass('gone')
+}
+// Detect request animation frame
+var scroll = window.requestAnimationFrame ||
+             // IE Fallback
+             function(callback){ window.setTimeout(callback, 1000/60)};
+var elementsToShow = document.querySelectorAll('.show-on-scroll'); 
+
+function loop() {
+
+    Array.prototype.forEach.call(elementsToShow, function(element){
+      if (isElementInViewport(element)) {
+        element.classList.add('is-visible');
+      } else {
+        element.classList.remove('is-visible');
+      }
+    });
+
+    scroll(loop);
+}
+
+// Call the loop for the first time
+loop();
+
+// Helper function from: http://stackoverflow.com/a/7557433/274826
+function isElementInViewport(el) {
+  // special bonus for those using jQuery
+  if (typeof jQuery === "function" && el instanceof jQuery) {
+    el = el[0];
+  }
+  var rect = el.getBoundingClientRect();
+  return (
+    (rect.top <= 0
+      && rect.bottom >= 0)
+    ||
+    (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight))
+    ||
+    (rect.top >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
+  );
+}
+
 //load on interaction
 const body = document.body;
 let loaded = false;
@@ -33,7 +84,22 @@ body.addEventListener('mouseover', onInteraction, {once:true});
 body.addEventListener('touchmove', onInteraction, {once:true});
 body.addEventListener('scroll', onInteraction, {once:true});
 body.addEventListener('keydown', onInteraction, {once:true});
-//LOADING SCREEN ANIMATION
+
+const onProgress = (event) => {
+const progressBar = event.target.querySelector('.progress-bar');
+const updatingBar = event.target.querySelector('.update-bar');
+updatingBar.style.width = `${event.detail.totalProgress*100}%`;
+if (event.detail.totalProgress == 1) {
+    progressBar.classList.add('hide');
+}
+};
+
+document.querySelector('#first').addEventListener('progress', onProgress);
+document.querySelector('#second').addEventListener('progress', onProgress);
+
+
+//LOADING SCREEN ANIMATION UNUSED
+/*
 $(window).load(function() {
     setTimeout(function(){
         $("#loading-txt").fadeOut(complete=txtChangeFadeIn);
@@ -56,12 +122,14 @@ $(window).load(function() {
         }, 8000)
     }
 })
+*/
+
 </script>
 {% endblock %}
 
 {% block pageContent %}
     <div class="garage-door-loader" id="garage-door-loader">
-        <p id="loading-txt" class="text">loading</p>
+        <p id="loading-txt" class="text"></p>
         <img id="loading-img" src="../static/img/garage door.jpeg" alt="">
     </div>
     <div class="landing-split-container" style="background-image:url(../static/img/garage2.jpeg)">
@@ -73,31 +141,61 @@ $(window).load(function() {
         <div class="column right">
             <!-- 3D object-->
             <!--<model-viewer src="../static/assets/car_models/free_1975_porsche_911_930_turbo/scene.gltf" alt="Car" auto-rotate ar ios-src="../static/assets/car_models/free_1975_porsche_911_930_turbo/scene.gltf"></model-viewer>-->
-            <model-viewer src="../static/assets/car_models/modelDatsun.glb" camera-orbit="30deg 75deg 105%" poster="../static/assets/car_models/posterDatsun.png" auto-rotate alt="Car" ar ios-src="../static/assets/free_1972_datsun_240k_gt/scene.gltf"></model-viewer>
+            <model-viewer 
+            id="first"
+            src="../static/assets/car_models/modelDatsun.glb" 
+            camera-orbit="30deg 75deg 105%" 
+            auto-rotate 
+            alt="Car" 
+            ar 
+            ios-src="../static/assets/free_1972_datsun_240k_gt/scene.gltf">
+                <div class="progress-bar" slot="progress-bar">
+                    <div class="update-bar"></div>
+                </div>
+            </model-viewer>
             <!--<canvas id="landing-car"></canvas>-->
         </div>
     
     </div>
+    <div class="mdg-info-wrapper" style="height: 50vh;">
+        <h2 class="inline-text show-on-scroll">
+            Expand your garage, in the digital world
+        </h2>
+        <p>
+            <strong>Your garage, your way</strong><br>
+            Collect from our selection of car NFT's powering the future
+        </p>
+        <p>
+            <strong>All you need, here</strong><br>
+            Digital Garage provides the tools for you to share, create, sell, buy, and explore, all contained within one site.
+        </p>
+    </div>
     <div class="call-to-action-wrapper">
         <model-viewer 
+        id="second"
         camera-orbit="calc(3.5rad + env(window-scroll-y) * 2rad) calc(50deg + env(window-scroll-y) * 40deg) calc(6m - env(window-scroll-y) * 1.5m)" 
         camera-target="auto auto 1m"
         src="../static/assets/car_models/free_1975_porsche_911_930_turbo/scene.gltf" 
         alt="Porsche 911 Turbo Model"
-        ></model-viewer>
+        >
+            <div class="progress-bar" slot="progress-bar">
+                <div class="update-bar"></div>
+            </div>
+        </model-viewer>
         <div class="call-to-action-text">
             <div class = "call-to-action">
-                <h1>Join us!</h1>
-                <p>Start buying, selling, and creating NFT's, in your own Digital Garage!</p>
-                <a href="{{ url_for('auth_bp.signup') }}"><button type="button" class="btnFill">Sign Up</button></a>
+                {% if current_user.is_authenticated %}
+                    <h1>Welcome back {{ current_user.first }}</h1>
+                    <p>Enter your garage to continue buying, selling, and creating NFT's, in your own Digital Garage!</p>
+                    <a href="{{ url_for('profile', username=current_user.username) }}"><button type="button" class="btnFill">Enter</button></a>
+                {% else %}
+                    <h1>Join us!</h1>
+                    <p>Start buying, selling, and creating NFT's, in your own Digital Garage!</p>
+                    <a href="{{ url_for('auth_bp.signup') }}"><button type="button" class="btnFill">Sign Up</button></a>
+                {% endif %}
             </div>
         </div>
     </div>
-    <div style="height: 50vh;">
-        <ul>
-            <li>Bruh</li>
-            <li>hehe</li>
-        </ul>
-    </div>
+    {% include 'footer.html' %}
 {% endblock %}
 

@@ -1,0 +1,15 @@
+@import url(base.css);
+footer{
+    background-color: #ABD3CF;
+    border-top: 2px solid #1A867E;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em 0 1em;
+}
+.icons i {
+    font-size: 2em;
+    margin: 0 .1em 0 .1em;
+    opacity: .85;
+}
