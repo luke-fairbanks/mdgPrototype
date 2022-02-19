@@ -54,7 +54,7 @@ def save_profile_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.instance_path, 'static/img/profile-images/', picture_fn)
+    picture_path = os.path.join(app.root_path, 'static/img/profile-images/', picture_fn)
     form_picture.save(picture_path)
     print("Picture is save at {}".format(picture_path))
     
