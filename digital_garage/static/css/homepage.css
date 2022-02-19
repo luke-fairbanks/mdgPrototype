@@ -114,6 +114,7 @@ transition: width 0.3s;
     display: flex;
     flex-direction: row-reverse;
     margin: 2em;
+    margin-bottom: 0;
     align-items: center;
     flex-wrap: nowrap;
 }
@@ -140,20 +141,20 @@ transition: width 0.3s;
     transform: rotateZ(-5deg);
 }
 .call-to-action-wrapper{
-    height: 75vh; 
+    height: 60vh; 
     width: 100vw; 
     display: flex;
     align-items: center;
 }
 .call-to-action-wrapper model-viewer{
-    height: 75%;
+    height: 90%;
     width: 50%;
 }
 .call-to-action-text{
     margin: 3em;
     background-color: #0B665F;
     width: 40%;
-    height: 50%;
+    height: 65%;
     /*border-radius: 77% 23% 64% 36% / 30% 69% 31% 70%; */
     border-radius: 5px;
     display: flex;
