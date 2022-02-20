@@ -29,7 +29,7 @@ window.onclick = function(event) {
 {% block pageContent %}
     <div class="profile-info-wrapper">
         <div class="profile-info">
-            <img class = "profile-img" src="{{ userProfilePicture }}">
+            <img draggable="false" class = "profile-img" src="{{ userProfilePicture }}">
             <div class="profile-info-body">
                 <h2 class="profile-username">
                     @{{ targetUser.username }}

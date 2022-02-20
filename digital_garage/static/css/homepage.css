@@ -191,7 +191,7 @@ transition: width 0.3s;
 }
       
 .btnFill:hover {
-color: #383736;
+color: var(--main-green);
 }
 
 .btnFill:before {

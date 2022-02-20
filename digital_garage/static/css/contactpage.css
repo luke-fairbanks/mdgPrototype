@@ -99,6 +99,7 @@ input[type=button], input[type=submit]{
 input[type=button]:hover, 
 input[type=submit]:hover{
     box-shadow:black solid 2px;
+    background-color: rgb(8, 83, 77);
 }
 
 /*STYLE THIS*/

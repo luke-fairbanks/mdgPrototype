@@ -19,11 +19,17 @@
 }
 .profile-img{
     max-width: var(--profile-pic-width);
+    height: var(--profile-pic-width);
+    object-fit: cover;
     border-radius: 100%;
     grid-column: 1;
+    border: 2px solid rgba(255, 255, 255, 0.37);
+    pointer-events: none;
 }
 .profile-name{
     font-weight: bold;
+    font-size: 20px;
+    letter-spacing: .5px;
 }
 .profile-info-body{
     grid-column: 2/3;
@@ -100,14 +106,15 @@ textarea{
     border: none;
     border-bottom: 3px solid rgb(14, 128, 118);
     background-color: var(--main-bkg-color);
+    border-radius: 2px 2px 0px 0px;
     width: 100%;
     height: 2em;
     padding: .25em;
-    transition: .1s;
+    transition: .2s;
 }
 input[type=text]:focus, input[type=password]:focus,
 textarea:focus{
-    background-color: white;
+    background-color: rgb(195, 236, 234);
     outline: none;
     border-radius: 2px;
 }
