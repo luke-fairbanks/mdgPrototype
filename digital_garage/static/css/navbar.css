@@ -8,6 +8,7 @@ nav {
     max-height: 3em;
     z-index: 5;
     background-color: var(--main-bkg-color);
+    user-select: none;
 }
 
 nav img {
@@ -27,6 +28,14 @@ nav img {
     display: block;
     content: '';
     border-bottom: 3px solid rgb(27, 221, 205);
+}
+.active_page:active::before{
+    position: fixed;
+    align-items: center;
+    top: 1;
+    transform: translateY(25px);
+    background-color: var(--main-bkg-color);
+    content: 'You are on this page';
 }
 .link-container{
     display: flex;

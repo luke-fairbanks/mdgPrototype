@@ -102,13 +102,21 @@ transition: width 0.3s;
 
 .right model-viewer,
 .right canvas{
-    height: 800px;
+    height: 75vh;
+    width: 100%;
+    bottom: -1;
+    position: absolute;
+    top: 10%;
+    border: none;
+}
+
+/*height: 800px;
     width: 800px;
     position: absolute;
     top: -10%;
     left: -10%;
     border: none;
-}
+*/
 
 .mdg-info-wrapper{
     display: flex;
