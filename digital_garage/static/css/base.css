@@ -1,7 +1,8 @@
 /* put variables in here and import base.css to all css files*/
 :root{
     --main-green: rgb(14, 128, 118);
-    --main-bkg-color: #E7F2F1
+    --main-bkg-color: #E7F2F1;
+    --secondary-bkg-color: #4AA099
 }
 body,html {
     margin: 0;

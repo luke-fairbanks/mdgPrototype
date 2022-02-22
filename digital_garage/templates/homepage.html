@@ -12,10 +12,10 @@ if ($(window).scrollTop() === 0) {
     //Garage door slide up 
     setTimeout(function(){
         $("#garage-door-loader").animate({top: '-900px'}, 'slow');
-    }, 500);
+    }, 300);
     setTimeout(function(){
         $("#garage-door-loader").addClass('gone')
-    }, 3000)
+    }, 1000)
 } else{
     $("#garage-door-loader").addClass('gone')
 }
@@ -24,18 +24,22 @@ var scroll = window.requestAnimationFrame ||
              // IE Fallback
              function(callback){ window.setTimeout(callback, 1000/60)};
 var elementsToShow = document.querySelectorAll('.show-on-scroll'); 
+var shown = false; 
 
 function loop() {
 
     Array.prototype.forEach.call(elementsToShow, function(element){
       if (isElementInViewport(element)) {
         element.classList.add('is-visible');
+        shown = true;
       } else {
-        element.classList.remove('is-visible');
+        //element.classList.remove('is-visible');
       }
     });
 
-    scroll(loop);
+    if (shown == false){
+        scroll(loop);
+    }
 }
 
 // Call the loop for the first time
@@ -98,6 +102,10 @@ if (event.detail.totalProgress == 1) {
 
 document.querySelector('#first').addEventListener('progress', onProgress);
 document.querySelector('#second').addEventListener('progress', onProgress);
+
+$('.card').on('click', function () {  
+    $(this).toggleClass('flipped');
+});
 
 
 //LOADING SCREEN ANIMATION UNUSED
@@ -171,7 +179,40 @@ $(window).load(function() {
             <strong>All you need, here</strong><br>
             Digital Garage provides the tools for you to share, create, sell, buy, and explore, all contained within one site.
         </p>
+        
     </div>
+    
+    <section class="svg-text-wrapper">
+        <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="-300 0 950 270" >
+            <path d="M-314,267 C105,364 400,100 812,279" id="path1" fill="none" stroke="#4AA099" stroke-width="120" stroke-linecap="round"/>
+        </svg>
+        <div class="homepage-auction-wrapper">
+            <h2 style="text-align: center; font-size: 40px; color: white;">Our hottest auctions now</h2>
+            <div class="auction-items">
+                {% for item in items %}
+                <div class="card-wrapper">
+                    <div class="auction-item card">
+                        <div class="front">
+                            <h2>{{ item.title }}</h2>
+                            <img src="../static/img/cartoon-car.png">
+                            <p>Pushing p</p>
+                        </div>
+                        <div class="back">
+                            <h3 style="text-align: center;">Like what you see?</h3>
+                            <ul>
+                                <li>Owner: ____</li>
+                                <li>Created: ____</li>
+                                <li>Posted: ____</li>
+                            </ul>
+                            <button class="slide">&nbsp;</button>
+                        </div>  
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="divider1"></div>
+    </section>
     <div class="call-to-action-wrapper">
         <model-viewer 
         id="second"

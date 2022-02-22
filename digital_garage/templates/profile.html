@@ -7,12 +7,21 @@
 {% block page_script %}
 <script>
 var modal = document.getElementById('editModal');
-var btn = document.getElementById('openEditForm');
+var iconBtn = document.getElementById('openEditFormIcon');
+var picBtn = document.getElementById('openEditFormPicture');
+var textBtn = document.getElementById('textBtn');
 var span = document.getElementsByClassName("close")[0];
 
-btn.onclick = function() {
+iconBtn.onclick = function() {
     modal.style.display = "block"
 }
+picBtn.onclick = function() {
+    modal.style.display = "block"
+}
+textBtn.onclick = function(){
+    modal.style.display = "block"
+}
+
 
 span.onclick = function() {
     modal.style.display = "none";
@@ -29,12 +38,22 @@ window.onclick = function(event) {
 {% block pageContent %}
     <div class="profile-info-wrapper">
         <div class="profile-info">
-            <img draggable="false" class = "profile-img" src="{{ userProfilePicture }}">
+            {% if canEdit == True %}
+            <div class="picture-container">
+                <img id="openEditFormPicture" class="profile-img" src="{{ userProfilePicture }}">
+                <div class="overlay-wrapper">
+                    <div id="textBtn"class="overlay-text">click to edit</div>
+                </div>
+            </div>
+            {% else %}
+                <img draggable="false" class = "profile-img" src="{{ userProfilePicture }}">
+            {% endif %}
+
             <div class="profile-info-body">
                 <h2 class="profile-username">
                     @{{ targetUser.username }}
                     {% if canEdit == True %}
-                        <a id="openEditForm"><i class="fas fa-user-edit"></i></a>
+                        <a id="openEditFormIcon"><i class="fas fa-user-edit"></i></a>
                     {% endif %}
                 </h2>
                 <p class="profile-name">{{ targetUser.first }} {{ targetUser.last }}</p>

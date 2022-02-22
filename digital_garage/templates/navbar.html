@@ -3,7 +3,8 @@
 </head>
 <header>
     <nav>
-        <img src="../static/img/personaluniverselogo.png">
+        <!--<img src="../static/img/personaluniverselogo.png">-->
+        <h1>MDG</h1>
 
         <div class="link-container">
         {% for link in nav %}
@@ -15,13 +16,14 @@
         {% endfor %}
         {% if current_user.is_authenticated %}
             {% if request.path == url_for('profile', username=current_user.username) %}
-                <p class="active_page" href="{{ url_for('profile', username=current_user.username) }}" style="cursor: pointer;">Your Garage</p>
+                <p class="navbar-btn active_btn" href="{{ url_for('profile', username=current_user.username) }}" style="cursor: pointer;">Your Garage</p>
             {% else %}
-                <a class="navbar-link" href="{{ url_for('profile', username=current_user.username) }}">Your Garage</a>
+                <a class="navbar-btn" href="{{ url_for('profile', username=current_user.username) }}">Your Garage</a>
             {% endif %}
-            <a class="navbar-link" href='/logout'><i class="fas fa-sign-out-alt"></i></a>
+            <a class="navbar-btn" href='/logout'><i class="fas fa-sign-out-alt"></i></a>
         {% else %}
-            <a class="navbar-link" href="{{ url_for('auth_bp.login') }}">Log In</a>
+            <a class="navbar-btn loginBtn" href="{{ url_for('auth_bp.login') }}">Log In</a>
+            <a class="navbar-btn signupBtn" href="{{ url_for('auth_bp.signup') }}">Get Started</a>
         {% endif %}
         </div>
     </nav>

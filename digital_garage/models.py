@@ -30,6 +30,12 @@ class User(UserMixin, db.Model):
         unique=True,
         nullable=False
     )
+    walletId = db.Column(
+        db.String(200),
+        index=False,
+        unique=True,
+        nullable=True
+    )
     email = db.Column(
         db.String(80),
         index=True,

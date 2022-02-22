@@ -25,6 +25,7 @@
     grid-column: 1;
     border: 2px solid rgba(255, 255, 255, 0.37);
     pointer-events: none;
+    user-select: none;
 }
 .profile-name{
     font-weight: bold;
@@ -35,12 +36,46 @@
     grid-column: 2/3;
 }
 
-#openEditForm{
+#openEditFormIcon{
     color: var(--main-green);
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
 }
+.picture-container{
+    position: relative
+}
+#openEditFormPicture{
+    pointer-events: all;
+    cursor: pointer;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.overlay-wrapper{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+.picture-container:hover img {
+    opacity: .3;
+}
+.picture-container:hover .overlay-wrapper{
+    opacity: 1;
+}
+.overlay-text{
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
 
 .modal {
     display: none;

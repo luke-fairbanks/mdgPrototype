@@ -14,17 +14,26 @@ nav = [
     {'name': 'About', 'url': '/user/luke'},
     {'name': 'Contact', 'url': '/contact'},
 ]  
+items = [
+    {'title': 'test1', 'id':'1'},
+    {'title': 'test2'},
+    {'title': 'test3'},
+    {'title': 'test4'},
+    {'title': 'test5'}
 
+]
 
 @app.route('/')
 def home():
     global nav
+    global items
     #landing page
     return render_template(
         'homepage.html',
         nav=nav,
         title="Digital Garage Co.",
         description='Welcome to the gateway to your digital garage.',
+        items=items,
     )
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -106,7 +115,11 @@ def profile(username):
             title='User "{}" not found'.format(username),
             nav=nav
         )
-
+"""@app.route('/auto/<id>')
+def productPage(id):
+    global nav
+    targetProduct = Car.query.filter_by(id=id).first()
+"""
 @app.route('/logout')
 @login_required
 def logout():
