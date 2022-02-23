@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block page_script %}
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/qrcode-modal@1.7.1/dist/cjs/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/browser@1.0.0-beta.46/lib/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/qrcode-modal@1.0.0-beta.46/lib/index.min.js"></script>
+<script type="module">
+</script>
 <script type="module" src="{{ url_for('static', filename='scripts/profilepage.js') }}""></script>
 {% endblock %}
 
