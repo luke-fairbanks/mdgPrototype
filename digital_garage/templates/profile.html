@@ -5,34 +5,8 @@
 {% endblock %}
 
 {% block page_script %}
-<script>
-var modal = document.getElementById('editModal');
-var iconBtn = document.getElementById('openEditFormIcon');
-var picBtn = document.getElementById('openEditFormPicture');
-var textBtn = document.getElementById('textBtn');
-var span = document.getElementsByClassName("close")[0];
-
-iconBtn.onclick = function() {
-    modal.style.display = "block"
-}
-picBtn.onclick = function() {
-    modal.style.display = "block"
-}
-textBtn.onclick = function(){
-    modal.style.display = "block"
-}
-
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/qrcode-modal@1.7.1/dist/cjs/index.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='scripts/profilepage.js') }}""></script>
 {% endblock %}
 
 {% block pageContent %}
@@ -54,6 +28,7 @@ window.onclick = function(event) {
                     @{{ targetUser.username }}
                     {% if canEdit == True %}
                         <a id="openEditFormIcon"><i class="fas fa-user-edit"></i></a>
+                        <button id="wallet-connect-btn">Connect Wallet</button>
                     {% endif %}
                 </h2>
                 <p class="profile-name">{{ targetUser.first }} {{ targetUser.last }}</p>
@@ -76,7 +51,7 @@ window.onclick = function(event) {
                     {{ form.csrf_token }}
                     <fieldset class="picture">
                         {{ form.picture.label }}
-                        {{ form.picture }}
+                        {{ form.picture(id="picture-upload") }}
                         {% if form.picture.errors %}
                             <ul class="errors">
                                 {% for error in form.picture.errors %}

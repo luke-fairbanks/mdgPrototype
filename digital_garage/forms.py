@@ -74,6 +74,10 @@ class SignupForm(FlaskForm):
     )
     dateOfBirth = DateField(
         'Date of Birth',
+        [
+            DataRequired()
+        ],
+        format='%Y-%m-%d',
         render_kw={"placeholder": "yyyy-mm-dd"}
     )
     submit = SubmitField('Register')

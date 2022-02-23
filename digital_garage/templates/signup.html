@@ -4,6 +4,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 {% endblock %}
 
+{% block page_script %} 
+<script>
+    $(function() {
+        $(".datepicker").datepicker({
+            dateFormat:'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            minDate: '-18y',
+            maxDate: '-0d',
+            yearRange:'-18:-0',
+            showAnim: 'fade'
+
+        });
+    })
+</script>
+{% endblock %}
 {% block pageContent %}
 <div class="centered-intro">
     <h1>{{title}}</h1>
@@ -87,7 +103,8 @@
         </fieldset>
         <fieldset class="dateOfBirth">
             {{ form.dateOfBirth.label }}
-            {{ form.dateOfBirth }}
+            {{ form.dateOfBirth(class='datepicker', autocomplete="off") }}
+            {{ form.hidden_tag() }}
             {% if form.dateOfBirth.errors %}
             <ul class="errors">
                 {% for error in form.dateOfBirth.errors %}

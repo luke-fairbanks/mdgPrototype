@@ -3,7 +3,7 @@ from fileinput import filename
 import os
 import secrets
 from flask import current_app as app
-from flask import Flask, url_for, render_template, redirect, flash, make_response, Blueprint, request
+from flask import Flask, url_for, render_template, redirect, flash, make_response, Blueprint, request, Markup
 from .email import send_email
 from .forms import ContactForm, UpdateProfileForm
 from .models import db, User
@@ -98,6 +98,9 @@ def profile(username):
                     form.username.data = current_user.username
                     form.email.data = current_user.email
                     form.bio.data = current_user.bio
+                else:
+                    errorMessage = Markup("There was an error submitting the form: <br><code>{}</code>".format(form.picture.errors))
+                    flash(errorMessage)
 
         userProfilePicture = url_for('static',filename='img/profile-images/' + targetUser.profile_picture)
         return render_template(

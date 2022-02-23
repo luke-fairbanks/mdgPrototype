@@ -158,9 +158,30 @@ input[type=button], input[type=submit]{
 }
 input[type=button]:hover, 
 input[type=submit]:hover{
-    box-shadow: inset 0 0 10px white;
+    transform: scale(1.05);
+    box-shadow:
+    -1px -5px 2.2px rgb(0 0 0 / 3%),
+     0 6.7px 5.3px rgb(0 0 0 / 5%), 
+     0 12.5px 10px rgb(0 0 0 / 6%), 
+     0px 12px 17.9px rgb(0 0 0 / 7%), 
+     0px 12px 33.4px rgb(0 0 0 / 9%), 
+     0px 16px 80px rgb(0 0 0 / 12%); 
 }
-
+input[type=button]:focus, 
+input[type=submit]:focus{
+    transform: scale(1);
+    box-shadow: 
+    -1px -5px 2.2px rgb(0 0 0 / 3%) inset,
+     0 6.7px 5.3px rgb(0 0 0 / 5%) inset, 
+     0 12.5px 10px rgb(0 0 0 / 6%) inset, 
+     0px 12px 17.9px rgb(0 0 0 / 7%) inset, 
+     0px 12px 33.4px rgb(0 0 0 / 9%) inset, 
+     0px 16px 80px rgb(0 0 0 / 12%) inset; 
+}
+.ui-datepicker-header{
+    background: var(--main-green);
+    border: none;
+}
 .alternative-option{
     margin: 5px;
 
