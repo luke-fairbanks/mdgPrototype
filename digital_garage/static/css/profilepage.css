@@ -10,12 +10,18 @@
     border-bottom: 1px solid var(--main-green);
 }
 .profile-info{
-    display: grid;
+    display: flex;
+    flex-direction: row;
     grid-template-columns: var(--profile-pic-width) auto;    
     grid-auto-flow: column;
     column-gap: 2em;
     width: 100%;
     align-items: center;
+}
+@media (max-width: 800px) {
+    .profile-info{
+        flex-wrap: wrap;
+    }
 }
 .profile-img{
     max-width: var(--profile-pic-width);
@@ -117,6 +123,54 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.navbar-btn{
+    color: var(--main-green);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 .25em;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 3px solid var(--main-green);
+    transition: .3s ease;
+    padding-bottom: 3px;
+}
+
+#wallet-connect-btn{
+    color: var(--main-green);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 0.25em;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 3px solid #FF686B;
+    transition: 300ms ease-in-out;
+    padding-bottom: 3px;
+    top: 0;
+    transform: translateY(-5px);
+    background-image: linear-gradient(45deg, #FF686B 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    background-color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+#wallet-connect-btn:hover{
+    transform: translateY(-5px);
+    background-position: 0;
+    color: white;
+    box-shadow:
+    -1px -5px 2.2px rgb(0 0 0 / 3%),
+     0 6.7px 5.3px rgb(0 0 0 / 5%), 
+     0 12.5px 10px rgb(0 0 0 / 6%), 
+     0px 12px 17.9px rgb(0 0 0 / 7%), 
+     0px 12px 33.4px rgb(0 0 0 / 9%), 
+     0px 16px 80px rgb(0 0 0 / 12%);
 }
 
 .form-wrapper{

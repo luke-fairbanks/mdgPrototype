@@ -25,7 +25,8 @@ window.onclick = function(event) {
     }
 }
 
-var WalletConnect = window.WalletConnect.default;
+
+/*var WalletConnect = window.WalletConnect.default;
 var WalletConnectQRCodeModal = window.WalletConnectQRCodeModal.default
 
 var walletConnector = new WalletConnect({
@@ -35,11 +36,15 @@ var uri = walletConnector.uri;
 $('#wallet-connect-btn').on('click',function(){
     WalletConnectQRCodeModal.open(uri);
 })
-
+*/
 
 import bncOnboard from 'https://cdn.skypack.dev/bnc-onboard';
 
 let web3;
+
+const RPC_URL = "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894"
+const APP_NAME = "MDGPrototype"
+const INFURA_KEY = "8bc341c8b6b94dd59171587ca949f894"
 
 var Web3 = window.Web3.default
 //var Onboard = window.bncOnboard.default
@@ -53,13 +58,33 @@ const onboard = bncOnboard({
   },
   walletSelect: {
       wallets: [
-        { walletName: "coinbase", preferred: true },
-        { walletName: "trust", preferred: true },
+        //{ walletName: "coinbase", preferred: true },
+        { walletName: "trust", preferred: true, rpcUrl: RPC_URL, },
         { walletName: "metamask", preferred: true },
         { walletName: "authereum" },
-        { walletName: "walletLink", rpcUrl: "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894", appName: "MDGprototype" }]
+        { walletName: "walletLink", rpcUrl: RPC_URL, appName: APP_NAME, preferred: true },
+        {
+            walletName: "walletConnect",
+            infuraKey: INFURA_KEY,
+            preferred: true
+          },
+        ]
   }
 });
 
-await onboard.walletSelect();
-await onboard.walletCheck();
+const readyToTransact = async () => {
+    if (!provider) {
+      const walletSelected = await onboard.walletSelect()
+      if (!walletSelected) return false
+    }
+
+    const ready = await onboard.walletCheck()
+    return ready
+  }
+$('#wallet-connect-btn').on('click', async function(){
+    const walletSelected = await onboard.walletSelect()
+    if (!walletSelected) return false
+    const ready = await onboard.walletCheck()
+    return ready
+
+})
