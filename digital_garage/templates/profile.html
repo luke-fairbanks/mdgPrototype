@@ -129,9 +129,116 @@
     </div>
     {% endif %}
 
-
     <div class="centered-intro">
         <h1>{{ targetUser.first }}'s Garage</h1>
-        <p>It seems {{ targetUser.first }}'s garage is empty...</p>
+        {% if not targetUser.assets %}
+        <div class="centered-intro">
+            <p>It seems {{ targetUser.first }}'s garage is empty...</p>
+        </div>
+        {% endif %}
+
     </div>
+    <div class="asset-card-wrapper">
+        <div class="assets">
+            {% if not targetUser.assets %}
+
+            {% else %}
+                {% for asset in targetUser.assets %}
+                    {% if canEdit %}
+                        {% if asset.show_on_profile == True %}
+                            <div class="card-wrapper">
+                        {% else %}
+                            <div class="card-wrapper darken-card">
+                        {% endif %}
+                            <div class="asset-item card">
+                                <div class="front">
+                                    <div class="card-header">
+                                        <h2>{{asset.name}}</h2>
+                                        <div class="header-selecters">
+                                            <label class="switch" id={{ asset.id }}>
+                                                <!--<form method = "POST" action="{{ url_for('profile', username=current_user.username) }}" enctype="multipart/form-data"> -->              
+                                                {% if asset.show_on_profile == True %}   
+                                                    {{ showForm.checked(class='show-checkbox', id=asset.id, checked='true') }}
+                                                {% else %}
+                                                    {{ showForm.checked(class='show-checkbox', id=asset.id) }}
+                                                {% endif %}
+        
+                                                <span class="slider"></span>
+                                            </label>
+                                            <i id="asset-trash"class="fas fa-trash-alt asset-trash"></i>
+                                                <div class="modal" id="trash-modal">
+                                                    <div id="trash-modal-content" class="modal-content">
+                                                        <span class="close">&times;</span>
+                                                        <div class="trash-confirm">
+                                                            <p>Are you sure you want to detete this asset?</p>
+                                                            <div class="trash-confirm-buttons">
+                                                                <button class="cancelDelete">Cancel</button>
+                                                                <button class="confirmDelete" id={{ asset.id }}>Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <img src="../static/img/cartoon-car.png">
+                                    <div class="card-info">
+                                        <p>Pushing p</p>
+                                        <p id="date">{{asset.date_created}}<p>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <h3 style="text-align: center;">Like what you see?</h3>
+                                    <ul>
+                                        <li>Owner: ____</li>
+                                        <li>Created: ____</li>
+                                        <li>Posted: ____</li>
+                                    </ul>
+                                    <button class="slide">&nbsp;</button>
+                                </div>  
+                            </div>
+                        </div>
+                        
+                    {% elif canEdit == False and asset.show_on_profile == True %}
+                        <div class="card-wrapper">
+                            <div class="asset-item card">
+                                <div class="front">
+                                    <div class="card-header" style="justify-content: center;">
+                                        <h2>{{asset.name}}</h2>
+                                    </div>
+                                    <img src="../static/img/cartoon-car.png">
+                                    <div class="card-info">
+                                        <p>Pushing p</p>
+                                        <p id="date">{{asset.date_created}}<p>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <h3 style="text-align: center;">Like what you see?</h3>
+                                    <ul>
+                                        <li>Owner: ____</li>
+                                        <li>Created: ____</li>
+                                        <li>Posted: ____</li>
+                                    </ul>
+                                    <button class="slide">&nbsp;</button>
+                                </div>  
+                            </div>
+                        </div>
+                    {% else %} 
+
+                    {% endif %}
+                    
+                {% endfor %}   
+            {% endif %}
+            {% if canEdit %}
+                    <div class="asset-item add-item">
+                        <!--<form method = "POST" action="{{ url_for('profile', username=current_user.username) }}" enctype="multipart/form-data">-->
+                            <!--{{ assetForm.csrf_token }}
+                            {{ assetForm.submit(class="add-item-btn") }}-->
+                            <i class="fas fa-plus fa-8x"></i>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
 {% endblock %}
+
+

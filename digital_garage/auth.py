@@ -1,9 +1,11 @@
 
+from cgi import test
+from ssl import cert_time_to_seconds
 from flask import Blueprint, render_template, request, redirect, flash, request, session, url_for
 from flask_login import login_required, logout_user, current_user, login_user
 from sqlalchemy.exc import IntegrityError
 from .forms import SignupForm, LoginForm
-from .models import db, User 
+from .models import db, User, Asset 
 from . import login_manager
 from .routes import nav
 
@@ -12,6 +14,9 @@ auth_bp = Blueprint(
     template_folder='templates',
     static_folder='static'
 )
+
+def create_test_asset(owner):
+    return Asset(name="test", date_created="today",owner_username=owner)
 
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
@@ -32,9 +37,12 @@ def signup():
                 email = form.email.data,
                 dateOfBirth = form.dateOfBirth.data,
             )
+            test1 = create_test_asset(username)
+            test2 = create_test_asset(username)
+            test3 = create_test_asset(username)
             user.set_password(form.password.data)
             #try:
-            db.session.add(user)
+            db.session.add_all([user,test1,test2,test3])
             db.session.commit() #creates new user
             """except IntegrityError:
                 db.session.rollback()

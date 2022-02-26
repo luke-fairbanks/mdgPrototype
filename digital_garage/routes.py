@@ -2,12 +2,15 @@ from fileinput import filename
 
 import os
 import secrets
+
+from matplotlib.pyplot import title
 from flask import current_app as app
-from flask import Flask, url_for, render_template, redirect, flash, make_response, Blueprint, request, Markup
+from flask import Flask, url_for, render_template, redirect, flash, make_response, Blueprint, request, Markup, jsonify
 from .email import send_email
-from .forms import ContactForm, UpdateProfileForm
-from .models import db, User
-from flask_login import current_user, login_required, logout_user    
+from .forms import ContactForm, UpdateProfileForm, AddAssetForm, ShowAssetForm
+from .models import db, User, Asset
+from flask_login import current_user, login_required, logout_user   
+from datetime import date 
 
 nav = [
     {'name': 'Home', 'url': '/'},
@@ -15,11 +18,11 @@ nav = [
     {'name': 'Contact', 'url': '/contact'},
 ]  
 items = [
-    {'title': 'test1', 'id':'1'},
-    {'title': 'test2'},
-    {'title': 'test3'},
-    {'title': 'test4'},
-    {'title': 'test5'}
+    {'title': 'test1', 'id':'1', 'date':'today'},
+    {'title': 'test2', 'date':'02/22/2022'},
+    {'title': 'test3', 'date':'04/15/2016'},
+    {'title': 'test4', 'date':'01/1/2022'},
+    {'title': 'test5', 'date':'12/31/2021'}
 
 ]
 
@@ -74,6 +77,8 @@ def save_profile_picture(form_picture):
 def profile(username):
     global nav
     form = UpdateProfileForm()
+    assetForm = AddAssetForm()
+    showForm = ShowAssetForm()
     canEdit = False
     targetUser = User.query.filter_by(username=username).first()
     if targetUser is not None:
@@ -98,19 +103,27 @@ def profile(username):
                     form.username.data = current_user.username
                     form.email.data = current_user.email
                     form.bio.data = current_user.bio
-                else:
+                elif form.picture.errors:
                     errorMessage = Markup("There was an error submitting the form: <br><code>{}</code>".format(form.picture.errors))
                     flash(errorMessage)
+
+                """if assetForm.validate_on_submit():
+                    print("bruh")
+                    newAsset = Asset(name="test", date_created=date.today().strftime("%m-%d-%Y"),owner_username=current_user.username)
+                    db.session.add(newAsset)
+                    db.session.commit() #creates new asset"""
 
         userProfilePicture = url_for('static',filename='img/profile-images/' + targetUser.profile_picture)
         return render_template(
             'profile.html',
-            title = 'Digital Garage Profile - '+username,
+            title = username+' - Digital Garage Profile',
             nav=nav,
             targetUser = targetUser,
             userProfilePicture = userProfilePicture,
             form=form,
-            canEdit=canEdit
+            canEdit=canEdit,
+            assetForm = assetForm,
+            showForm = showForm
         )
     else:
         return render_template(
@@ -123,6 +136,49 @@ def productPage(id):
     global nav
     targetProduct = Car.query.filter_by(id=id).first()
 """
+@app.route('/asset/<assetId>', methods=['GET', 'POST'])
+def asset_page(assetId):
+    targetAsset = Asset.query.filter_by(id=assetId).first()
+    if targetAsset is not None:
+
+        return render_template(
+            "assetpage.html",
+            nav=nav,
+            title = "Asset "+assetId+" - Digital Garage Co.",
+            targetAsset=targetAsset
+        )
+    else:
+        return render_template(
+            "errorPages/404.html",
+            title='Asset "{}" not found'.format(assetId),
+            nav=nav
+        )
+@app.route('/assetpost',methods=['GET','POST'])
+def update_assets():
+    if request.method == "POST":
+        asset_data = request.get_json()
+        
+        assetId = asset_data[0]["AssetId"]
+        assetShow = asset_data[1]["AssetShow"]
+        assetDelete = asset_data[2]["AssetDelete"]
+        if not assetDelete:
+            targetAsset = Asset.query.filter_by(id=assetId).first()
+            print(targetAsset)
+            print(type(assetShow))
+            targetAsset.show_on_profile = assetShow
+            db.session.commit() #updates database
+            print(assetShow)
+            print(targetAsset.show_on_profile)
+            results = {'processed':'true'}
+        elif assetDelete:
+            Asset.query.filter_by(id=assetId).delete()
+            db.session.commit() #updates database
+            results = {'deleted':'true'}
+        return jsonify(results)
+    
+    return redirect(url_for('not_found'))        
+
+
 @app.route('/logout')
 @login_required
 def logout():

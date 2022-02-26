@@ -3,28 +3,114 @@ var iconBtn = document.getElementById('openEditFormIcon');
 var picBtn = document.getElementById('openEditFormPicture');
 var textBtn = document.getElementById('textBtn');
 var span = document.getElementsByClassName("close")[0];
-
-iconBtn.onclick = function() {
-    modal.style.display = "block"
-}
-picBtn.onclick = function() {
-    modal.style.display = "block"
-}
-textBtn.onclick = function(){
-    modal.style.display = "block"
-}
+var trashModal = document.getElementById('trash-modal');
 
 
-span.onclick = function() {
-    modal.style.display = "none";
+if (iconBtn != null){
+    iconBtn.onclick = function() {
+        modal.style.display = "block"
+    }
 }
+if (picBtn != null){
+    picBtn.onclick = function() {
+        modal.style.display = "block"
+    }
+}
+if (textBtn != null){
+    textBtn.onclick = function(){
+        //modal.style.display = "block"
+        $(modal).css("display","block")
+    }
+}
+if (span != null){
+    span.onclick = function() {
+        modal.style.display = "none";
+        trashModal.style.display = "none";
 
+    }
+}
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        trashModal.style.display = "none";
+
     }
 }
 
+$('window').ready(function(){
+    $('.card').removeClass('is-loading')
+})
+$('.card').on('click', function () {  
+    $(this).toggleClass('flipped');
+});
+
+//$('.card').draggable()
+//$(".assets").sortable()
+//SORT THE CARDS
+
+$('.modal').click(function(e){
+    e.stopPropagation();
+})
+
+$('.asset-trash').on('click', function(e){
+    e.stopPropagation();
+    $(this).next().css("display","block");
+    $(this).closest(".modal").css("cursor",'default')
+    $('.close').click(function(e){
+        e.stopPropagation();
+        $(this).closest(".modal").css("display",'none')
+
+    })
+    $('.cancelDelete').click(function(e){
+        e.stopPropagation()
+        $(this).closest(".modal").css("display",'none')
+        $(this).closest(".modal").css("cursor",'pointer')
+
+    })
+    $('.confirmDelete').click(function(){
+        var assetid = $(this).attr('id')
+        $(this).closest(".card-wrapper").css("display",'none');
+        var asset_data =[
+            {"AssetId": assetid},
+            {"AssetShow": 'none'},
+            {"AssetDelete": true }
+        ]
+        $.ajax({
+            type:"POST",
+            url:'/assetpost',
+            data: JSON.stringify(asset_data),
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result) {
+                console.log(result);
+            }
+        })
+    
+    })
+})
+
+
+$('.show-checkbox').click(function(e){
+    $(this).parents().toggleClass('darken-card')
+    var assetid = $(this).attr('id')
+    var assetshow = $(this).is(":checked")
+    var asset_data =[
+        {"AssetId":assetid},
+        {"AssetShow":assetshow},
+        {"AssetDelete": false }
+
+    ]
+    $.ajax({
+        type:"POST",
+        url:'/assetpost',
+        data: JSON.stringify(asset_data),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(result) {
+            console.log(result)
+        }
+    })
+});
 
 /*var WalletConnect = window.WalletConnect.default;
 var WalletConnectQRCodeModal = window.WalletConnectQRCodeModal.default
@@ -54,6 +140,7 @@ const onboard = bncOnboard({
   subscriptions: {
     wallet: wallet => {
        web3 = new Web3(wallet.provider)
+       console.log(`${wallet.name} is now connected!`)
     }
   },
   walletSelect: {
@@ -82,9 +169,10 @@ const readyToTransact = async () => {
     return ready
   }
 $('#wallet-connect-btn').on('click', async function(){
-    const walletSelected = await onboard.walletSelect()
-    if (!walletSelected) return false
-    const ready = await onboard.walletCheck()
-    return ready
+    await onboard.walletSelect();
+    await onboard.walletCheck();
 
+})
+$('#wallet-check-btn').on('click',function(){
+    onboard.walletCheck()
 })

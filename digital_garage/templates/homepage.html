@@ -58,16 +58,19 @@
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="-300 0 950 270" >
             <path d="M-314,267 C105,364 400,100 812,279" id="path1" fill="none" stroke="#4AA099" stroke-width="120" stroke-linecap="round"/>
         </svg>
-        <div class="homepage-auction-wrapper">
+        <div class="asset-card-wrapper">
             <h2 style="text-align: center; font-size: 40px; color: white;">Our hottest auctions now</h2>
-            <div class="auction-items">
+            <div class="assets">
                 {% for item in items %}
                 <div class="card-wrapper">
-                    <div class="auction-item card is-loading">
+                    <div class="asset-item card is-loading">
                         <div class="front">
                             <h2>{{ item.title }}</h2>
                             <img src="../static/img/cartoon-car.png">
-                            <p>Pushing p</p>
+                            <div class="card-info">
+                                <p>Pushing p</p>
+                                <p id="date">{{ item.date }}</p>
+                            </div>
                         </div>
                         <div class="back">
                             <h3 style="text-align: center;">Like what you see?</h3>
@@ -76,7 +79,9 @@
                                 <li>Created: ____</li>
                                 <li>Posted: ____</li>
                             </ul>
-                            <button class="slide">&nbsp;</button>
+                            <a href="{{ url_for('asset_page', assetId=24) }}">
+                                <button type="button" class="slide">&nbsp;</button>
+                            </a>
                         </div>  
                     </div>
                 </div>

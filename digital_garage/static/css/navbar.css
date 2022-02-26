@@ -34,13 +34,20 @@ nav h1{
     content: '';
     border-bottom: 3px solid rgb(27, 221, 205);
 }
+.active_page::before{
+    transition: .3s ease;
+}
 .active_page:active::before{
-    position: fixed;
+    position: absolute;
     align-items: center;
     top: 1;
-    transform: translateY(25px);
-    background-color: var(--main-bkg-color);
+    transform: translateY(125%);
+    background-color: #00000087;
+    color: white;
     content: 'You are on this page';
+    margin-top: 5px;
+    border-radius: 2px;
+    padding: 0px 5px;
 }
 .link-container{
     display: flex;
@@ -78,6 +85,7 @@ nav h1{
     border: 3px solid var(--main-green);
     transition: .3s ease;
     padding-bottom: 3px;
+    z-index: 2;
 }
 .navbar-btn.signupBtn,
 .active_btn{
@@ -93,4 +101,17 @@ nav h1{
      0px 12px 17.9px rgb(0 0 0 / 7%), 
      0px 12px 33.4px rgb(0 0 0 / 9%), 
      0px 16px 80px rgb(0 0 0 / 12%);
+
 }
+
+/*.active_btn::after{
+    content: '';
+    position:absolute;
+    z-index: -1;
+
+}
+.active_btn:hover::after{
+    content: 'You are currently on this page';
+    bottom: 0;
+    text-shadow: 10px 0px black;
+}*/

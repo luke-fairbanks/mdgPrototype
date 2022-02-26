@@ -1,4 +1,5 @@
 @import url(base.css);
+@import url(asset-card-wrapper.css);
 
 :root{
     --profile-pic-width: 150px;
@@ -147,15 +148,15 @@
     margin: 0 0.25em;
     padding: 2px 10px;
     border-radius: 20px;
-    border: 3px solid #FF686B;
+    border: 3px solid var(--main-green);
     transition: 300ms ease-in-out;
     padding-bottom: 3px;
     top: 0;
     transform: translateY(-5px);
-    background-image: linear-gradient(45deg, #FF686B 50%, transparent 50%);
+    background-image: linear-gradient(45deg, var(--main-green) 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
-    background-color: white;
+    background-color: var(--main-bkg-color);
     cursor: pointer;
     user-select: none;
 }
@@ -218,7 +219,7 @@ textarea{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-input[type=button], input[type=submit]{
+.form-wrapper input[type=button], .form-wrapper input[type=submit]{
     margin: 1em 4em;
     background-color: rgb(14, 128, 118);
     border: none;
@@ -230,8 +231,8 @@ input[type=button], input[type=submit]{
     border-radius: 3px;
     transition: .4s ease;
 }
-input[type=button]:hover, 
-input[type=submit]:hover{
+.form-wrapper input[type=button]:hover, 
+.form-wrapper input[type=submit]:hover{
     transform: scale(1.05);
     box-shadow:
     -1px -5px 2.2px rgb(0 0 0 / 3%),
@@ -241,8 +242,8 @@ input[type=submit]:hover{
      0px 12px 33.4px rgb(0 0 0 / 9%), 
      0px 16px 80px rgb(0 0 0 / 12%); 
 }
-input[type=button]:focus, 
-input[type=submit]:focus{
+.form-wrapper input[type=button]:focus, 
+.form-wrapper input[type=submit]:focus{
     transform: scale(1);
     box-shadow: 
     -1px -5px 2.2px rgb(0 0 0 / 3%) inset,
@@ -287,4 +288,171 @@ input[type=submit]:focus{
   
 .error:last-of-type {
     margin-bottom: 0;
+}
+
+.asset-card-wrapper{
+    margin: 0 4em;
+}
+.asset-item{
+    border: 4px solid var(--main-green);
+    border-radius: 10px;
+}
+.assets{
+    grid-column-gap: .2em;
+}
+.add-item {
+    margin: 1em;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: var(--main-green);
+}
+.add-item i{
+    font: 900;
+}
+.card-header{
+    width: 85%;
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.card-wrapper.darken-card{
+    opacity: .65;
+}
+.header-selecters{
+    font-size: 1.5rem;
+    align-items: center;
+    display: flex;
+    column-gap: 0.5em;
+}
+
+.asset-trash{
+    transition: .2s linear;
+}
+.asset-trash:hover{
+    color: red;
+}
+
+#trash-modal{
+    border-radius: 5px;
+}
+
+#trash-modal-content{
+    width: 75%;
+    margin: 5% auto;
+}
+.trash-confirm-buttons{
+    width: 100%;
+    display: flex;
+    column-gap: .5em;
+}
+.cancelDelete,
+.confirmDelete{
+    border-radius: 5px;
+    padding: 3px 7px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.cancelDelete{
+    background-color: var(--main-bkg-color);
+    border: 3px solid var(--main-green);
+    width: 60%;
+    color: var(--main-green);
+    transition: 300ms ease-in-out;
+    background-image: linear-gradient(45deg, var(--main-green) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    background-color: var(--main-bkg-color);
+}
+.cancelDelete:hover{
+    background-position: 0;
+    color: white;
+}
+.confirmDelete{
+    background-color: red;
+    border: 3px rgb(252, 65, 65);
+    width: 40%;
+    color: white;
+    transition: 300ms ease-in-out;
+
+}
+
+.cancelDelete:hover,
+.confirmDelete:hover{
+    box-shadow:
+    -1px -5px 2.2px rgb(0 0 0 / 3%),
+     0 6.7px 5.3px rgb(0 0 0 / 5%), 
+     0 12.5px 10px rgb(0 0 0 / 6%), 
+     0px 12px 17.9px rgb(0 0 0 / 7%), 
+     0px 12px 33.4px rgb(0 0 0 / 9%), 
+     0px 16px 80px rgb(0 0 0 / 12%);
+
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 4em;
+    height: 30px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 10px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    font-size: .75em;
+    content: "Hide";
+    font-weight: bold;
+    height: 100%;
+    width: 60%;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.842);
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    
+    transition: .4s ease;
+  }
+  
+  input:checked + .slider {
+  }
+  input:checked + .slider::before{
+  }
+  
+  input:focus + .slider {
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(68%);
+    background-color: var(--main-green);
+    content: 'Show';
+    color: white;
+  }
+.add-item-btn{
+    height: 100%;
+    width: 100%;
 }

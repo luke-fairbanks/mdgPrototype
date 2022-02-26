@@ -1,12 +1,13 @@
 from ast import Pass
 import email
 from email import message
+from email.policy import default
 from random import choices
 from unicodedata import name
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, SubmitField, PasswordField, DateField, SelectField,TextAreaField
+from wtforms import StringField, SubmitField, PasswordField, DateField, SelectField,TextAreaField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, URL, Optional
 
 
@@ -135,3 +136,12 @@ class UpdateProfileForm(FlaskForm):
     )
 
     submit = SubmitField('Update')
+
+class AddAssetForm(FlaskForm):
+    submit = SubmitField()
+
+class ShowAssetForm(FlaskForm):
+    checked = BooleanField(
+    'label',
+    #default = "checked"
+    )
