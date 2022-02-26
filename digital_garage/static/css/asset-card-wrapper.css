@@ -123,6 +123,7 @@ position: relative;
 }
 .asset-item.flipped{
     transform: rotateY(180deg);
+    visibility: visible;
 }
 
 .card:hover{

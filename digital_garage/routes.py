@@ -3,7 +3,6 @@ from fileinput import filename
 import os
 import secrets
 
-from matplotlib.pyplot import title
 from flask import current_app as app
 from flask import Flask, url_for, render_template, redirect, flash, make_response, Blueprint, request, Markup, jsonify
 from .email import send_email
@@ -140,12 +139,13 @@ def productPage(id):
 def asset_page(assetId):
     targetAsset = Asset.query.filter_by(id=assetId).first()
     if targetAsset is not None:
-
+        ownerUsername = targetAsset.owner_username
         return render_template(
             "assetpage.html",
             nav=nav,
             title = "Asset "+assetId+" - Digital Garage Co.",
-            targetAsset=targetAsset
+            targetAsset=targetAsset,
+            ownerUsername= ownerUsername
         )
     else:
         return render_template(
