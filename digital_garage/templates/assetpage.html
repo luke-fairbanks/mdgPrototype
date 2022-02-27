@@ -5,9 +5,18 @@
 {% endblock %}
 
 {% block pageContent %}
-    {{ targetAsset.name }}
-    <img src="../static/img/cartoon-car.png" alt="Asset Image">
-    {{ ownerUsername }}
+<div class="product-card-wrapper">
+    <div class="product-card">
+        <img class="assetImage" src="../static/img/cartoon-car.png" alt="Asset Image">
+        <div class="owner-info">
+            <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
+            <h2>{{ ownerUsername }}</h2>
+        </div>
+        <h1>{{ targetAsset.name }}</h1>
+
+        
+    </div>
+</div>
 {% endblock %}
 
 

@@ -1,1 +1,36 @@
 @import url(base.css);
+
+.product-card-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-card{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.assetImage{
+    max-width: 100%;
+    border: 3px solid #9acac6;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+.owner-info{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    column-gap: .5em;
+    justify-content: flex-start;
+}
+.profileImage{
+    max-width: 3rem;
+    border-radius: 100%;
+}
+.owner-info h2{
+    margin: 0;
+}

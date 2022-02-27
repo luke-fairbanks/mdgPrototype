@@ -95,8 +95,11 @@ if (event.detail.totalProgress == 1) {
 }
 };
 
+
+
 document.querySelector('#first').addEventListener('progress', onProgress);
 document.querySelector('#second').addEventListener('progress', onProgress);
+
 
 $('.card').on('click', function () {  
     $(this).toggleClass('flipped');

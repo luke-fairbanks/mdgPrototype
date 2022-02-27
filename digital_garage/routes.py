@@ -29,6 +29,8 @@ items = [
 def home():
     global nav
     global items
+    auctionAssets = Asset.query.filter_by(show_on_profile=True).limit(8).all()
+
     #landing page
     return render_template(
         'homepage.html',
@@ -36,6 +38,7 @@ def home():
         title="Digital Garage Co.",
         description='Welcome to the gateway to your digital garage.',
         items=items,
+        auctionAssets=auctionAssets
     )
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -122,7 +125,7 @@ def profile(username):
             form=form,
             canEdit=canEdit,
             assetForm = assetForm,
-            showForm = showForm
+            showForm = showForm,
         )
     else:
         return render_template(
@@ -138,6 +141,10 @@ def productPage(id):
 @app.route('/asset/<assetId>', methods=['GET', 'POST'])
 def asset_page(assetId):
     targetAsset = Asset.query.filter_by(id=assetId).first()
+    targetOwner = User.query.filter_by(username=targetAsset.owner_username).first()
+    ownerProfilePicture = url_for('static',filename='img/profile-images/' + targetOwner.profile_picture)
+
+
     if targetAsset is not None:
         ownerUsername = targetAsset.owner_username
         return render_template(
@@ -145,7 +152,8 @@ def asset_page(assetId):
             nav=nav,
             title = "Asset "+assetId+" - Digital Garage Co.",
             targetAsset=targetAsset,
-            ownerUsername= ownerUsername
+            ownerUsername= ownerUsername,
+            ownerProfilePicture=ownerProfilePicture
         )
     else:
         return render_template(
