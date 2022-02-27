@@ -4,19 +4,57 @@
     <link href="{{ url_for('static', filename='css/assetpage.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block page_script %}
+    <script>
+        const container = document.querySelector(".container");
+        let allEmojis = [
+            "🏎",
+            "🚗",
+            "🚙",
+            "🛻",
+            "🚌",
+            "🚕"
+            ];
+        let index = 1;
+
+        container.addEventListener("click", (e) => {
+            const box = document.createElement("div");
+            box.classList.add("emojiStyle");
+            box.innerHTML = allEmojis[randomInteger(0, allEmojis.length - 1)];
+            box.style.fontSize = `40px`;
+            box.style.position = "absolute";
+            box.style.left = `${randomInteger(0, 90)}%`;
+            box.style.top = `${randomInteger(0, 90)}%`;
+            box.style.zIndex = index;
+            container.appendChild(box);
+            $(box).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                $(this).remove();
+              });
+        });
+
+function randomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+    </script>
+{% endblock %}
+
 {% block pageContent %}
+<div class="container">
 <div class="product-card-wrapper">
     <div class="product-card">
         <img class="assetImage" src="../static/img/cartoon-car.png" alt="Asset Image">
-        <div class="owner-info">
-            <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
-            <h2>{{ ownerUsername }}</h2>
+        <div class="owner-info" >
+            <a href="{{ url_for('profile', username= ownerUsername) }}">
+                <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
+                <h2>@{{ ownerUsername }}</h2>
+            </a>
         </div>
         <h1>{{ targetAsset.name }}</h1>
-
-        
     </div>
 </div>
+</div>
+
 {% endblock %}
 
 

@@ -10,6 +10,7 @@ nav {
     z-index: 5;
     background-color: var(--main-bkg-color);
     user-select: none;
+    width: auto;
 }
 
 nav img {

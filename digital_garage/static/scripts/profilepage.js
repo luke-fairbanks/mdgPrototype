@@ -37,9 +37,9 @@ window.onclick = function(event) {
     }
 }
 
-$('window').ready(function(){
+/*$('window').ready(function(){
     $('.card').removeClass('is-loading')
-})
+})*/
 $('.card').on('click', function () {  
     $(this).toggleClass('flipped');
 });
@@ -49,6 +49,9 @@ $('.card').on('click', function () {
 //SORT THE CARDS
 
 $('.modal').click(function(e){
+    e.stopPropagation();
+})
+$('.user-direct-btn').click(function(e){
     e.stopPropagation();
 })
 
