@@ -1,5 +1,28 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <script>
+
+        window.onload = function(){
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".link-container");
+
+            hamburger.addEventListener("click", mobileMenu);
+
+            function mobileMenu(){
+                hamburger.classList.toggle("active")
+                navMenu.classList.toggle("active")
+            }
+            const navLink = document.querySelectorAll(".navbar-link");
+
+            navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+            function closeMenu() {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }
+        }
+        
+    </script>
 </head>
 <header>
     <nav>
@@ -8,25 +31,44 @@
             <h1>MDG</h1>
         </a>
 
-        <div class="link-container">
+        <ul class="link-container">
         {% for link in nav %}
             {% if request.path == link.url %}
-                <p class="active_page" href="" style="cursor: pointer;"">{{ link.name }}</p>
+                <li class="nav-item">
+                    <p class="active_page" href="" style="cursor: pointer;"">{{ link.name }}</p>
+                </li>
             {% else %}
-                <a class="navbar-link" href="{{ link.url }}">{{ link.name }}</a>
+                <li class="nav-item">
+                    <a class="navbar-link" href="{{ link.url }}">{{ link.name }}</a>
+                </li>
             {% endif %}
         {% endfor %}
         {% if current_user.is_authenticated %}
             {% if request.path == url_for('profile', username=current_user.username) %}
-                <p class="navbar-btn active_btn" href="{{ url_for('profile', username=current_user.username) }}" style="cursor: pointer;">Your Garage</p>
+                <li class="nav-item">
+                    <p class="navbar-btn active_btn" href="{{ url_for('profile', username=current_user.username) }}" style="cursor: pointer;">Your Garage</p>
+            
             {% else %}
-                <a class="navbar-btn" href="{{ url_for('profile', username=current_user.username) }}">Your Garage</a>
+                <li class="nav-item">
+                    <a class="navbar-btn" href="{{ url_for('profile', username=current_user.username) }}">Your Garage</a>
+            
             {% endif %}
-            <a class="navbar-btn" href='/logout'><i class="fas fa-sign-out-alt"></i></a>
+                
+                    <a class="navbar-btn" href='/logout'><i class="fas fa-sign-out-alt"></i></a>
+                </li>
         {% else %}
-            <a class="navbar-btn loginBtn" href="{{ url_for('auth_bp.login') }}">Log In</a>
-            <a class="navbar-btn signupBtn" href="{{ url_for('auth_bp.signup') }}">Get Started</a>
+            <li class="nav-item">
+                <a class="navbar-btn loginBtn" href="{{ url_for('auth_bp.login') }}">Log In</a>
+            </li>
+            <li class="nav-item">
+                <a class="navbar-btn signupBtn" href="{{ url_for('auth_bp.signup') }}">Get Started</a>
+            </li>
         {% endif %}
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </div>
     </nav>
 </header>
