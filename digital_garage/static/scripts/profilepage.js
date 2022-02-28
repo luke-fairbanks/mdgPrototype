@@ -183,7 +183,7 @@ $('#wallet-check-btn').on('click',function(){
 //Cars traverse the bottom of the page on click 
 const container = document.querySelector(".road-svg-container");
 let allEmojis = [
-    "🏎",
+    "&#127950;",
     "🚗",
     "🚙",
     "🛻",
@@ -228,10 +228,34 @@ $('body').keydown(function(e){
         sendCar();
     }
 })
-
-
+var userView = true;
 function sendCarLoop(){
-    sendCar();
-    setTimeout(sendCarLoop, 7000);
+    if (userView == true) {
+        sendCar();
+        setTimeout(sendCarLoop, 7000);
+    }else{
+
+    }
 }
 sendCarLoop();
+
+$(window).blur(function(){
+    userView = false
+  });
+  $(window).focus(function(){
+    userView = true
+    sendCarLoop();
+  });
+
+//when hover over road, add tooltip
+$(document).ready(function(){
+    $('.emoji-road-wrapper').hover(function(){
+        $("#besideMouse").html("Click me!");
+        $(".emoji-road-wrapper").mousemove(function(e){
+                var cpos = { top: e.pageY + 10, left: e.pageX + 10 };
+                $('#besideMouse').offset(cpos);
+        }, function(){
+                $("#besideMouse").html("");
+        });
+    });
+})

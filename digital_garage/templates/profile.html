@@ -190,9 +190,9 @@
                                 <div class="back">
                                     <h3 style="text-align: center;">Like what you see?</h3>
                                     <ul>
-                                        <li>Owner: ____</li>
-                                        <li>Created: ____</li>
-                                        <li>Posted: ____</li>
+                                        <li>Owner: you</li>
+                                        <li>Created: {{asset.date_created}}</li>
+                                        <li>Posted: {{asset.date_created}}</li>
                                     </ul>
                                     <a class="user-direct-btn"href="{{ url_for('asset_page', assetId=asset.id) }}">
                                         <button class="slide">&nbsp;</button>
@@ -217,9 +217,9 @@
                                 <div class="back">
                                     <h3 style="text-align: center;">Like what you see?</h3>
                                     <ul>
-                                        <li>Owner: ____</li>
-                                        <li>Created: ____</li>
-                                        <li>Posted: ____</li>
+                                        <li>Owner: @{{asset.owner_username}}</li>
+                                        <li>Created: {{asset.date_created}}</li>
+                                        <li>Posted: {{asset.date_created}}</li>
                                     </ul>
                                     <a class="user-direct-btn" href="{{ url_for('asset_page', assetId=asset.id) }}">
                                         <button class="slide">&nbsp;</button>
@@ -243,6 +243,7 @@
                 {% endif %}
             </div>
         </div>
+        <p style="z-index:10; position:fixed;" id="besideMouse"></p>
         <div class="emoji-road-wrapper" style="overflow: hidden;">
         <div class="road-boarder-container">
             <svg viewBox="0 0 966 29" fill="none" xmlns="http://www.w3.org/2000/svg">
