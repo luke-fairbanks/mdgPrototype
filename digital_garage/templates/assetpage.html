@@ -16,8 +16,7 @@
             "🚕"
             ];
         let index = 1;
-
-        container.addEventListener("click", (e) => {
+        function sendCar(){
             const box = document.createElement("div");
             box.classList.add("emojiStyle");
             box.innerHTML = allEmojis[randomInteger(0, allEmojis.length - 1)];
@@ -30,7 +29,21 @@
             $(box).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                 $(this).remove();
               });
+        }
+        container.addEventListener("click", (e) => {
+            sendCar()
         });
+        $('body').keyup(function(e){
+            if(e.keyCode == 32){
+                sendCar();
+            }
+        })
+        window.onkeydown = function(e) {
+            if (e.keyCode == 32 && e.target == document.body) {
+              e.preventDefault();
+            }
+          };
+        
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

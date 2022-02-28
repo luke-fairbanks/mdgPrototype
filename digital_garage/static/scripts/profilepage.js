@@ -128,7 +128,6 @@ $('#wallet-connect-btn').on('click',function(){
 */
 
 import bncOnboard from 'https://cdn.skypack.dev/bnc-onboard';
-
 let web3;
 
 const RPC_URL = "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894"
@@ -192,35 +191,6 @@ let allEmojis = [
     "🚕"
     ];
 let index = 1;
-
-container.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const box = document.createElement("div");
-    box.classList.add("emojiStyle");
-    box.innerHTML = allEmojis[randomInteger(0, allEmojis.length - 1)];
-    box.style.fontSize = `4vw`;
-    box.style.position = "absolute";
-    var picker = randomInteger(1,2);
-    if (picker == 1){
-        box.style.left = `-10%`;
-        box.style.bottom = `0`;
-        box.classList.add('fromLeft')
-    }else if (picker == 2){
-        box.style.right = `-10%`;
-        box.style.bottom = `60%`;
-        box.classList.add('fromRight')
-    }
-    box.style.zIndex = index;
-    container.appendChild(box);
-    $(box).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $(this).remove();
-        });
-});
-
-function randomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function sendCar(){
     const box = document.createElement("div");
     box.classList.add("emojiStyle");
@@ -241,7 +211,27 @@ function sendCar(){
     container.appendChild(box);
     $(box).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
         $(this).remove();
-      });
-    setTimeout(sendCar, 7000);
+        });
+
 }
-sendCar();
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}  
+
+container.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sendCar()
+});
+
+$('body').keydown(function(e){
+    if(e.which == 32){
+        sendCar();
+    }
+})
+
+
+function sendCarLoop(){
+    sendCar();
+    setTimeout(sendCarLoop, 7000);
+}
+sendCarLoop();
