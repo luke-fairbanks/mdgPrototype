@@ -104,6 +104,9 @@ document.querySelector('#second').addEventListener('progress', onProgress);
 $('.card').on('click', function () {  
     $(this).toggleClass('flipped');
 });
+$('.user-direct-btn').click(function(e){
+    e.stopPropagation();
+})
 
 
 //LOADING SCREEN ANIMATION UNUSED

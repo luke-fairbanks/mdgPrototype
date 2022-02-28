@@ -50,12 +50,46 @@
   0 12.5px 10px rgba(0, 0, 0, 0.06),
   0 22.3px 17.9px rgba(0, 0, 0, 0.072),
   0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-  0 100px 80px rgba(0, 0, 0, 0.12)
-;
+  0 100px 80px rgba(0, 0, 0, 0.12);
     border-radius: 15px;
     border: 3px solid white;
-
 }
+@media (max-width: 700px) {
+    .product-card{
+        width: 80%;
+    }
+}
+.share-link-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.share-link{
+    user-select: none;
+    color: gray;
+    text-decoration: none;
+    display: flex;
+    font-size: 1.2em;
+    font-weight: 800;
+    column-gap: .3em;
+    align-items: baseline;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(70deg, var(--main-green), var(--main-green) 50%, gray 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+}
+.share-link:hover{
+    background-position: 0 100%;
+}
+.share-link h3{
+    margin: 0;
+}
+
 .assetImage{
     max-width: 100%;
     border-radius: 5px;
@@ -67,8 +101,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: flex-start;
-
+    justify-content: space-between;
 }
 .owner-info a{
     display: flex;
@@ -76,6 +109,16 @@
     column-gap: .5em;
     text-decoration: none;
     align-items: center;
+}
+.owner-info p{
+    color: gray;
+    margin: 0;
+}
+@media (max-width: 400px) {
+    .owner-info{
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 .profileImage{
     max-width: 3rem;

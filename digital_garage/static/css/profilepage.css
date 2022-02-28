@@ -4,7 +4,11 @@
 :root{
     --profile-pic-width: 150px;
 }
-
+body{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
 .profile-info-wrapper{
     margin: 3% 20% 0% 20% ;
     padding-bottom: 3%;
@@ -290,6 +294,7 @@ textarea{
     margin-bottom: 0;
 }
 
+
 .asset-card-wrapper{
     margin: 0 4em;
 }
@@ -455,4 +460,39 @@ textarea{
 .add-item-btn{
     height: 100%;
     width: 100%;
+}
+
+.road-svg-container{
+    width: 100%;
+    bottom: 0;
+    background-color: #535252;
+    position: relative;
+}
+.road-boarder-container{
+    transform: translateY(5px);
+}
+.emojiStyle{
+    user-select: none;
+}
+
+.emojiStyle.fromRight{
+    animation: fromRightToLeft 10s linear ;
+}
+@keyframes fromRightToLeft {
+    to{
+        right: 100%;
+    }
+}
+.emojiStyle.fromLeft{
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    animation: fromLeftToRight 10s linear ;
+}
+@keyframes fromLeftToRight {
+    to{
+        left: 100%;
+    }
 }

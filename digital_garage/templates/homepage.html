@@ -13,7 +13,7 @@
 {% block pageContent %}
     <div class="garage-door-loader" id="garage-door-loader">
         <p id="loading-txt" class="text"></p>
-        <img id="loading-img" src="../static/img/garage door.jpeg" alt="">
+        <img id="loading-img" src="../static/img/garage-door-dark.png" alt="">
     </div>
     <div class="landing-split-container" style="background-image:url(../static/img/garage2.jpeg)">
         <div class="column left">
@@ -84,7 +84,7 @@
                                 <li>Created: {{ asset.date_created}}</li>
                                 <li>Posted: {{ asset.date_created }}</li>
                             </ul>
-                            <a href="{{ url_for('asset_page', assetId=asset.id) }}">
+                            <a class="user-direct-btn" href="{{ url_for('asset_page', assetId=asset.id) }}">
                                 <button type="button" class="slide">&nbsp;</button>
                             </a>
                         </div>  

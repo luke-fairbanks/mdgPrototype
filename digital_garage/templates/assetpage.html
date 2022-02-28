@@ -36,6 +36,21 @@ function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+$('.share-link').on('click',function(){
+    var dummy = document.createElement('input'),
+    text = window.location.href;
+
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+
+    $(this).html("<h3>Copied to clipboard!<h3>");
+    setTimeout(function(){
+        $('.share-link').html("<h3>Share<h3><i class='fas fa-share-square'></i>");
+    }, 2000)
+})
     </script>
 {% endblock %}
 
@@ -43,14 +58,21 @@ function randomInteger(min, max) {
 <div class="container">
 <div class="product-card-wrapper">
     <div class="product-card">
+        <div class="share-link-wrapper">
+            <a class="share-link" href="#"><h3>Share</h3><i class="fas fa-share-square"></i></a>
+        </div>
         <img class="assetImage" src="../static/img/cartoon-car.png" alt="Asset Image">
         <div class="owner-info" >
             <a href="{{ url_for('profile', username= ownerUsername) }}">
                 <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
                 <h2>@{{ ownerUsername }}</h2>
             </a>
+            <p>
+                created: {{ targetAsset.date_created }}
+            </p>
         </div>
         <h1>{{ targetAsset.name }}</h1>
+        
     </div>
 </div>
 </div>
