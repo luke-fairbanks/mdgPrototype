@@ -37,6 +37,7 @@
 .asset-item{
     padding: 1em;
     min-height: 200px;
+    min-width: 150px;
     background-color: var(--main-bkg-color);
     border-radius: 10px;
     transform-style: preserve-3d;
@@ -129,7 +130,7 @@ position: relative;
   }
 @media (max-width:500px) {
    .back{
-     width: 100px;
+     /*width: 100px;*/
      font-size: 1em;
    }
 }
