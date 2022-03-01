@@ -91,6 +91,7 @@ li {
     transition: .3s ease;
     padding-bottom: 3px;
     z-index: 2;
+    width: auto;
 }
 .navbar-btn.signupBtn,
 .active_btn{

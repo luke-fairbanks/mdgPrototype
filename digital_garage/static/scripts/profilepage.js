@@ -250,12 +250,17 @@ $(window).blur(function(){
 //when hover over road, add tooltip
 $(document).ready(function(){
     $('.emoji-road-wrapper').hover(function(){
-        $("#besideMouse").html("Click me!");
-        $(".emoji-road-wrapper").mousemove(function(e){
-                var cpos = { top: e.pageY + 10, left: e.pageX + 10 };
-                $('#besideMouse').offset(cpos);
-        }, function(){
-                $("#besideMouse").html("");
-        });
-    });
+        var tooltipSpan = document.getElementById('tooltip-span');
+
+        window.onmousemove = function (e) {
+            var x = e.clientX,
+                y = e.clientY;
+            tooltipSpan.style.top = (y + 10) + 'px';
+            tooltipSpan.style.left = (x + 10) + 'px';
+        };    
+    }, function(){
+        window.onmousemove = function () {
+            
+        }
+    })
 })

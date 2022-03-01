@@ -470,6 +470,22 @@ textarea{
     width: 100%;
 }
 
+.emoji-road-wrapper{
+    position: relative;
+}
+.emoji-road-wrapper span{
+    display: none;
+    z-index: 10;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+}
+.emoji-road-wrapper:hover span {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+}
+
 .road-svg-container{
     width: 100%;
     bottom: 0;
