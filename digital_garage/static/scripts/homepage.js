@@ -1,3 +1,4 @@
+
 //scroll to top
 if ($(window).scrollTop() === 0) {
     //Garage door slide up 
@@ -10,6 +11,7 @@ if ($(window).scrollTop() === 0) {
 } else{
     $("#garage-door-loader").addClass('gone')
 }
+
 // Detect request animation frame
 var scroll = window.requestAnimationFrame ||
              // IE Fallback

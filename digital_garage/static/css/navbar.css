@@ -141,8 +141,16 @@ li {
         z-index: 10;
     }
     .link-container.active{
-        top: 3rem;
         position: absolute;
+        animation: slide-down .4s forwards;
+    }
+    @keyframes slide-down {
+        from{
+            top: -100%
+        }
+        to{
+            top: 3rem;
+        }
     }
     .nav-item{
         margin: 1rem 0;
