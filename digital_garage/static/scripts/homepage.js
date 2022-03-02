@@ -3,7 +3,7 @@
 if ($(window).scrollTop() === 0) {
     //Garage door slide up 
     setTimeout(function(){
-        $("#garage-door-loader").animate({top: '-900px'}, 'slow');
+        $("#garage-door-loader").animate({top: '-100%'}, 'slow');
     }, 300);
     setTimeout(function(){
         $("#garage-door-loader").addClass('gone')

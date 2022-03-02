@@ -177,6 +177,9 @@ transition: width 0.3s;
     .left{
         width: auto;
     }
+    model-viewer{
+        display: none;
+    }
 }
 .inline-text{
     opacity: 0;

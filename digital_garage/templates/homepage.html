@@ -111,11 +111,11 @@
             <div class = "call-to-action">
                 {% if current_user.is_authenticated %}
                     <h1>Welcome back {{ current_user.first }}</h1>
-                    <p>Enter your garage to continue buying, selling, and creating NFT's, in your own Digital Garage!</p>
+                    <p>Enter your garage to continue buying and selling NFT's, in your own Digital Garage!</p>
                     <a href="{{ url_for('profile', username=current_user.username) }}"><button type="button" class="btnFill">Enter</button></a>
                 {% else %}
                     <h1>Join us!</h1>
-                    <p>Start buying, selling, and creating NFT's, in your own Digital Garage!</p>
+                    <p>Start buying and selling NFT's, in your own Digital Garage!</p>
                     <a href="{{ url_for('auth_bp.signup') }}"><button type="button" class="btnFill">Sign Up</button></a>
                 {% endif %}
             </div>
