@@ -145,6 +145,7 @@ transition: width 0.3s;
     margin-bottom: 0;
     align-items: center;
     flex-wrap: nowrap;
+    max-width: 1500px;
 }
 .mdg-info-wrapper p{
     font-size: 1.25em;
@@ -248,6 +249,7 @@ svg {
 .call-to-action-wrapper model-viewer{
     height: 90%;
     width: 50%;
+    display: none
 }
 .call-to-action-text{
     margin: 3em;

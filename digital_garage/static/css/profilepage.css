@@ -29,8 +29,8 @@ body{
     }
 }
 .profile-img{
-    max-width: var(--profile-pic-width);
-    height: var(--profile-pic-width);
+    width: var(--profile-pic-width);
+    height: var(--profile-pic-width);    
     object-fit: cover;
     border-radius: 100%;
     grid-column: 1;
