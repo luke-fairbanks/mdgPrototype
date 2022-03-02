@@ -249,18 +249,22 @@ $(window).blur(function(){
 
 //when hover over road, add tooltip
 $(document).ready(function(){
-    $('.emoji-road-wrapper').hover(function(){
-        var tooltipSpan = document.getElementById('tooltip-span');
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
-        window.onmousemove = function (e) {
-            var x = e.clientX,
-                y = e.clientY;
-            tooltipSpan.style.top = (y + 10) + 'px';
-            tooltipSpan.style.left = (x + 10) + 'px';
-        };    
-    }, function(){
-        window.onmousemove = function () {
-            
-        }
-    })
+    }else{ 
+        $('.emoji-road-wrapper').hover(function(){
+            var tooltipSpan = document.getElementById('tooltip-span');
+
+            window.onmousemove = function (e) {
+                var x = e.clientX,
+                    y = e.clientY;
+                tooltipSpan.style.top = (y + 10) + 'px';
+                tooltipSpan.style.left = (x + 10) + 'px';
+            };    
+        }, function(){
+            window.onmousemove = function () {
+
+            }
+        })
+    }
 })
