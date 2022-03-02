@@ -249,6 +249,7 @@ $(window).blur(function(){
 
 //when hover over road, add tooltip
 $(document).ready(function(){
+    //check if user is on mobile. if so, do not include hover tooltip
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
     }else{ 
