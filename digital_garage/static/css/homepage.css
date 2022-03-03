@@ -129,7 +129,6 @@ transition: width 0.3s;
     margin-bottom: 0;
     align-items: center;
     flex-wrap: nowrap;
-    max-width: 1500px;
 }
 .mdg-info-wrapper p{
     font-size: 1.25em;
