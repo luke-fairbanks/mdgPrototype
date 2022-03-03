@@ -12,6 +12,8 @@ if ($(window).scrollTop() === 0) {
     $("#garage-door-loader").addClass('gone')
 }
 
+
+
 // Detect request animation frame
 var scroll = window.requestAnimationFrame ||
              // IE Fallback
@@ -97,10 +99,24 @@ if (event.detail.totalProgress == 1) {
 }
 };
 
-
-
 document.querySelector('#first').addEventListener('progress', onProgress);
 document.querySelector('#second').addEventListener('progress', onProgress);
+
+$(window).blur(function(){
+    $("#first").hide();
+    $('#second').hide();
+  });
+  $(window).focus(function(){
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+    } 
+    else{
+      if (window.innerWidth > 700){
+        $("#first").show();
+        $('#second').show();
+      }
+    }
+  });
 
 
 $('.card').on('click', function () {  

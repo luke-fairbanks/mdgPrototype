@@ -27,10 +27,18 @@
 }
 @media (max-width: 500px) {
   .assets{
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+  }
+  .assets{
+    margin: 0;
+    grid-row-gap: 0;
   }
   .asset-card-wrapper {
     margin: 0;
+  }
+  .asset-card-wrapper h2{
+    font-size: 32px !important;
+    margin-top: 1em;
   }
 }
 
