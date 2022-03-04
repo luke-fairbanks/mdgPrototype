@@ -259,6 +259,12 @@ svg {
 
 }
 
+.disclaimer{
+    text-align: center;
+    color: rgb(168, 168, 168);
+    margin-top: 1em;
+}
+
 .stats-columns .column:hover{
     transform: scale(1.05);
 }
