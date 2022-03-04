@@ -263,6 +263,7 @@ svg {
     text-align: center;
     color: rgb(168, 168, 168);
     margin-top: 1em;
+    font-size: 12px;
 }
 
 .stats-columns .column:hover{
