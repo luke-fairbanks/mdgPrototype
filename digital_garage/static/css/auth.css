@@ -15,7 +15,8 @@ fieldset{
     padding: none;
 }
 form {
-    min-width: 50%;
+    width: 50%;
+    max-width: 36rem;
     border: rgba(14, 128, 119, 0.507) 5px solid;
     background-color: white;
     transition: .3s cubic-bezier(0.09, -1.13, 0.22, 2.37);
