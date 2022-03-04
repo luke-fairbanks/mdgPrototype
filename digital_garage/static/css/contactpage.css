@@ -153,5 +153,11 @@ input[type=submit]:focus{
       form{
           width: 100%;
       }
+      .centered-intro h1{
+          margin-bottom: 0;
+      }
+      .centered-intro p{
+          width: 80%;
+      }
 
   }

@@ -68,6 +68,7 @@ transition: width 0.3s;
   
 .landing-split-container{
     height: 70vh;
+    min-height: 500px;
     background-repeat: no-repeat;
     color: var(--main-bkg-color);
     object-fit: cover;
@@ -224,7 +225,7 @@ svg {
 }
 
 .stats-info-wrapper{
-    margin: 10vh 5vh;
+    margin: 10vh 5vh 5vh 5vh;
     display: flex;
     flex-direction: column;
     max-width: 1460px;

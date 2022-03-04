@@ -234,6 +234,6 @@ input[type=submit]:focus{
         margin-left: 1em;
     }
     form{
-        min-width: 60%;
+        min-width: 80%;
     }
 }
