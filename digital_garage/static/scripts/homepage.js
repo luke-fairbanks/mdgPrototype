@@ -5,29 +5,6 @@ import { Gradient } from "https://gist.githack.com/jordienr/64bcf75f8b08641f205b
 const gradient = new Gradient();
 gradient.initGradient("#gradient-canvas");
 
-var controller = new ScrollMagic.Controller();
-var scene = new ScrollMagic.Scene({
-  triggerElement: "#trigger-second",
-  triggerHook: "onEnter"
-})
-  .setClassToggle(".change-position-on-scroll, nav", "is-relative")
-  .addTo(controller);
-
-var blackoutTweenFirst = TweenMax.to("#second .blackout", 1, {
-  opacity: 0,
-  ease: Linear.easeNone
-});
-
-var scene = new ScrollMagic.Scene({
-  duration: "100%",
-  triggerElement: "#blackout-first",
-  triggerHook: "onEnter"
-})
-  .setClassToggle("#second .blackout", "is-visible")
-  .setTween(blackoutTweenFirst)
-  .addTo(controller);
-
-
 $('.nft-prototype-card').click(function(){
   var clickedButton = $(this);
   this.remove();
@@ -101,7 +78,7 @@ $.fn.isInViewport = function() {
   return elementBottom > viewportTop && elementTop < viewportBottom;
 };
 
-$(window).on('resize scroll', function() {
+$(window).on('resize scroll load', function() {
   $('.show-on-scroll').each(function() {
     if ($(this).isInViewport()) {
       $(this).addClass('is-visible')

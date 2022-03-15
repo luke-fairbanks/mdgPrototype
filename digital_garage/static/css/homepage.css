@@ -6,66 +6,6 @@ html, body {
     overflow-x: hidden;
     /*overflow-y:hidden;*/
 }
-nav{
-    position: fixed !important;
-    width: -webkit-fill-available !important;
-    background: var(--main-bkg-color) !important;
-}
-nav.is-relative{
-    position: relative ;
-    width: auto ;
-    background-color: transparent ;
-    margin: 0 !important;
-}
-/*garage door slider styles*/
-.section {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100vh;
-    margin-bottom: 100vh;
-    box-shadow: 0 0 20px rgba(0,0,0,.6);
-    transform: translate3d(0, 0, 0);
-}
-  
-  .garagedoor {
-    position: relative;
-    z-index: 40;
-    background-image: url(../img/garage-door-dark.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-  
-  .under-curtain {
-    z-index: 30;
-    margin-bottom: 0;
-    height: auto;
-    box-shadow: none;
-
-}
-  
-  .is-relative {
-    position: relative;
-    margin-top: -100vh;
-}
-  
-  .blackout {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    backface-visibility: hidden;
-    z-index: 10000;
-}
-  
-  .is-visible {
-    display: block;
-}
 
 .garage-door-loader{
     position: fixed;
@@ -132,7 +72,6 @@ transition: width 0.3s;
 .landing-split-container{
     min-height: 500px;
     background-repeat: no-repeat;
-    color: var(--main-bkg-color);
     object-fit: cover;
     background-size:cover;
     background-position: center;
@@ -143,8 +82,6 @@ transition: width 0.3s;
     flex-wrap: wrap;
     padding: 1.5em 3.5em;
     margin-bottom: 10vh;
-    position: absolute;
-    margin-top: 10vh;
 }
 
 .landing-split-container .left h1{
@@ -156,7 +93,12 @@ transition: width 0.3s;
     -1px 1px 0 var(--main-green),
      1px 1px 0 var(--main-green);
      width: 100%;
+     color: var(--main-bkg-color);
+
     }
+.landing-split-container .left h2{
+    color: white;
+}
 .landing-split-container .left p{
     font-size: 25px;
     color: var(--main-green);
@@ -656,6 +598,7 @@ svg {
 .call-to-action-text{
     margin: 3em;
     background-color: #4AA099;
+    background-color: var(--main-green);
     width: 40%;
     height: 65%;
     /*border-radius: 77% 23% 64% 36% / 30% 69% 31% 70%; */
