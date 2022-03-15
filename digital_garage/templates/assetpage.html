@@ -6,6 +6,40 @@
 
 {% block page_script %}
     <script>
+
+        //Load model viewer 
+
+        const onProgress = (event) => {
+            const progressBar = event.target.querySelector('.progress-bar');
+            const updatingBar = event.target.querySelector('.update-bar');
+            updatingBar.style.width = `${event.detail.totalProgress*100}%`;
+            if (event.detail.totalProgress == 1) {
+                progressBar.classList.add('hide');
+            }
+            };
+            
+        document.querySelector('#asset').addEventListener('progress', onProgress);
+
+        $('#asset').load = function(){
+            alert('hello')
+        }
+            
+            $(window).blur(function(){
+                $('#asset').hide();
+              });
+              $(window).focus(function(){
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            
+                } 
+                else{
+                  if (window.innerWidth > 700){
+                    $('#asset').show();
+                  }
+                }
+              });
+
+              
+
         const container = document.querySelector(".container");
         let allEmojis = [
             "🏎",
@@ -70,19 +104,40 @@ $('.share-link').on('click',function(){
 {% block pageContent %}
 <div class="container">
 <div class="product-card-wrapper">
-    <div class="product-card">
-        <div class="share-link-wrapper">
-            <a class="share-link" href="#"><h3>Share</h3><i class="fas fa-share-square"></i></a>
-        </div>
-        <img class="assetImage" src="../static/img/cartoon-car.png" alt="Asset Image">
-        <div class="owner-info" >
-            <a href="{{ url_for('profile', username= ownerUsername) }}">
-                <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
-                <h2>@{{ ownerUsername }}</h2>
-            </a>
-            <p>
-                created: {{ targetAsset.date_created }}
-            </p>
+    <div class="product-card-model">
+        {#<img class="assetImage" style="background-image: url(../static/img/garage2.jpeg);" src="../static/img/cartoon-car.png" alt="Asset Image">#}
+        <!--Model VIEWER-->
+        <model-viewer 
+        id="asset"
+        bounds="tight"
+        poster="../static/img/garage-door-dark.png"
+        camera-controls
+        orbit-sensitivity=".8"
+        shadow-intensity="1"
+        camera-orbit="149.1deg 81.33deg auto"
+        src="../static/assets/car_models/cyberpunk_car/scene.gltf" 
+        alt="Porsche 911 Turbo Model">
+
+            <div class="share-link-wrapper">
+                <a class="share-link" href="#"><h3>Share</h3><i class="fas fa-share-square"></i></a>
+            </div>
+
+            <div class="progress-bar" slot="progress-bar">
+                <div class="update-bar"></div>
+            </div>
+        </model-viewer>
+    </div>
+    <div class="product-card-info">
+        <div class="asset-info">
+            <div class="owner-info" >
+                <a href="{{ url_for('profile', username= ownerUsername) }}">
+                    <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
+                    <h2>@{{ ownerUsername }}</h2>
+                </a>
+                <p>
+                    created: {{ targetAsset.date_created }}
+                </p>
+            </div>
         </div>
         <h1>{{ targetAsset.name }}</h1>
         

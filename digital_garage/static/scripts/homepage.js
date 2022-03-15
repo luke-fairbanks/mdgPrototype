@@ -1,63 +1,114 @@
 
-//scroll to top
-if ($(window).scrollTop() === 0) {
-    //Garage door slide up 
-    setTimeout(function(){
-        $("#garage-door-loader").animate({top: '-100%'}, 'slow');
-    }, 300);
-    setTimeout(function(){
-        $("#garage-door-loader").addClass('gone')
-    }, 1000)
-} else{
-    $("#garage-door-loader").addClass('gone')
-}
+//landing page gradient
+import { Gradient } from "https://gist.githack.com/jordienr/64bcf75f8b08641f205bd6a1a0d4ce1d/raw/35a5c7c1ddc9f97ec84fe7e1ab388a3b726db85d/Gradient.js";
+
+const gradient = new Gradient();
+gradient.initGradient("#gradient-canvas");
+
+var controller = new ScrollMagic.Controller();
+var scene = new ScrollMagic.Scene({
+  triggerElement: "#trigger-second",
+  triggerHook: "onEnter"
+})
+  .setClassToggle(".change-position-on-scroll, nav", "is-relative")
+  .addTo(controller);
+
+var blackoutTweenFirst = TweenMax.to("#second .blackout", 1, {
+  opacity: 0,
+  ease: Linear.easeNone
+});
+
+var scene = new ScrollMagic.Scene({
+  duration: "100%",
+  triggerElement: "#blackout-first",
+  triggerHook: "onEnter"
+})
+  .setClassToggle("#second .blackout", "is-visible")
+  .setTween(blackoutTweenFirst)
+  .addTo(controller);
 
 
-
-// Detect request animation frame
-var scroll = window.requestAnimationFrame ||
-             // IE Fallback
-             function(callback){ window.setTimeout(callback, 1000/60)};
-var elementsToShow = document.querySelectorAll('.show-on-scroll'); 
-var shown = false; 
-
-function loop() {
-
-    Array.prototype.forEach.call(elementsToShow, function(element){
-      if (isElementInViewport(element)) {
-        element.classList.add('is-visible');
-        shown = true;
-      } else {
-        //element.classList.remove('is-visible');
-      }
-    });
-
-    if (shown == false){
-        scroll(loop);
-    }
-}
-
-// Call the loop for the first time
-loop();
-
-// Helper function from: http://stackoverflow.com/a/7557433/274826
-function isElementInViewport(el) {
-  // special bonus for those using jQuery
-  if (typeof jQuery === "function" && el instanceof jQuery) {
-    el = el[0];
+$('.nft-prototype-card').click(function(){
+  var clickedButton = $(this);
+  this.remove();
+  $('.nft-prototype-card-wrapper').prepend(clickedButton);
+});
+$(window).on('load', function(){
+  function rotateCard(){
+    if ($('.nft-prototype-card-wrapper').is(":hover") == false){
+      $('.nft-prototype-card-wrapper').prepend($('.nft-prototype-card').last());
+    };
+    setTimeout(rotateCard,7000)
   }
-  var rect = el.getBoundingClientRect();
-  return (
-    (rect.top <= 0
-      && rect.bottom >= 0)
-    ||
-    (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.top <= (window.innerHeight || document.documentElement.clientHeight))
-    ||
-    (rect.top >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
-  );
+  setTimeout(rotateCard,7000);
+});
+
+//Car company logo carousel
+$(window).on('load', function(){
+  // Please run it with window.onload, not with document.ready
+  initSmoothScrolling('.block','smoothscroll');
+});
+
+function initSmoothScrolling(container,animation){
+ /*
+	* @param {String} container Class or ID of the animation container
+	* @param {String} animation Name of the animation, e.g. smoothscroll
+	*/
+	var sliderWidth = 0;	
+	var animationWidth = 0;	
+	var sliderHeight = $('>div>div:first-of-type',container).outerHeight(false);
+
+	$('>div>div', container).each(function(){				
+		animationWidth += $(this).outerWidth(false);		
+	});
+	
+	// detect number of visible slides
+	var slidesVisible = $(container).width() / $('>div>div:first-of-type',container).outerWidth(false);	
+	slidesVisible = Math.ceil(slidesVisible);
+
+  // count slides to determine animation speed
+	var slidesNumber = $('>div>div', container).length;
+	var speed = slidesNumber*4;
+	
+// append the tail	
+	$('>div>div',container).slice(0,slidesVisible).clone().appendTo($('>div',container));	
+
+	// Detect the slider width with appended tail
+	$('>div>div', container).each(function(){
+		sliderWidth += $(this).outerWidth(false);
+	});
+
+	// set slider dimensions
+	$('>div',container).css({'width':sliderWidth,'height':sliderHeight});
+  
+// Insert styles to html
+	$("<style type='text/css'>@keyframes "+animation+" { 0% { margin-left: 0px; } 100% { margin-left: -"+animationWidth+"px; } } "+$('>div>div:first-of-type',container).selector+" { -webkit-animation: "+animation+" "+speed+"s linear infinite; -moz-animation: "+animation+" "+speed+"s linear infinite; -ms-animation: "+animation+" "+speed+"s linear infinite; -o-animation: "+animation+" "+speed+"s linear infinite; animation: "+animation+" "+speed+"s linear infinite; }</style>").appendTo("head");	
+
+	// restart the animation (e.g. for safari & ie)	
+	var cl = $(container).attr("class");
+	$(container).removeClass(cl).animate({'nothing':null}, 1, function () {
+		$(this).addClass(cl);
+	});
 }
+
+$.fn.isInViewport = function() {
+  var elementTop = $(this).offset().top;
+  var elementBottom = elementTop + $(this).outerHeight();
+
+  var viewportTop = $(window).scrollTop();
+  var viewportBottom = viewportTop + $(window).height();
+
+  return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
+$(window).on('resize scroll', function() {
+  $('.show-on-scroll').each(function() {
+    if ($(this).isInViewport()) {
+      $(this).addClass('is-visible')
+    } else {
+    }
+  });
+});
 
 $('window').ready(function(){
     $('.card').removeClass('is-loading')
@@ -99,12 +150,11 @@ if (event.detail.totalProgress == 1) {
 }
 };
 
-document.querySelector('#first').addEventListener('progress', onProgress);
-document.querySelector('#second').addEventListener('progress', onProgress);
+//document.querySelector('#first').addEventListener('progress', onProgress);
+document.querySelector('#car-model').addEventListener('progress', onProgress);
 
 $(window).blur(function(){
-    $("#first").hide();
-    $('#second').hide();
+    $('#car-model').hide();
   });
   $(window).focus(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -112,8 +162,7 @@ $(window).blur(function(){
     } 
     else{
       if (window.innerWidth > 700){
-        $("#first").show();
-        $('#second').show();
+        $('#car-model').show();
       }
     }
   });

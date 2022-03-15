@@ -162,7 +162,7 @@ position: relative;
 }
 .card-wrapper{
     transition: .3s ease;
-    margin: 1em;
+    margin: .5em;
 }
 .card-wrapper:hover{
     transform: scale(1.07);

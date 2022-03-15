@@ -18,6 +18,7 @@ pkginfo==1.7.0
 pycosat==0.6.3
 PyMySQL==1.0.2
 python-dotenv==0.19.2
+random
 requests
 SQLAlchemy==1.4.31
 Werkzeug==2.0.1

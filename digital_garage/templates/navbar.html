@@ -5,12 +5,15 @@
         window.onload = function(){
             const hamburger = document.querySelector(".hamburger");
             const navMenu = document.querySelector(".link-container");
+            const navBar = document.querySelector("nav") 
 
             hamburger.addEventListener("click", mobileMenu);
 
             function mobileMenu(){
                 hamburger.classList.toggle("active")
                 navMenu.classList.toggle("active")
+                navBar.classList.toggle("active");
+                //$("nav").css("background-color", "var(--main-bkg-color)");
             }
             const navLink = document.querySelectorAll(".navbar-link");
 
@@ -19,6 +22,7 @@
             function closeMenu() {
                 hamburger.classList.remove("active");
                 navMenu.classList.remove("active");
+                navBar.classList.remove("active");
             }
         }
         
@@ -43,6 +47,7 @@
                 </li>
             {% endif %}
         {% endfor %}
+        
         {% if current_user.is_authenticated %}
             {% if request.path == url_for('profile', username=current_user.username) %}
                 <li class="nav-item">

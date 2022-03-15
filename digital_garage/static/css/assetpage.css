@@ -34,25 +34,49 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: auto;
+    flex-direction: row;
+    width: 70%;
+    /*box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);*/
+    filter: 
+    drop-shadow(0 2.8px 2.2px rgba(0, 0, 0, 0.034))
+    drop-shadow(0 6.7px 5.3px rgba(0, 0, 0, 0.048))
+    drop-shadow(0 12.5px 10px rgba(0, 0, 0, 0.06))
+    drop-shadow(0 22.3px 17.9px rgba(0, 0, 0, 0.072))
+    drop-shadow(0 41.8px 33.4px rgba(0, 0, 0, 0.086))
+    drop-shadow(0 100px 80px rgba(0, 0, 0, 0.12))
+    ;
+    overflow: hidden;
+}
+.product-card-model{
+    width: 90%;
+    border: 3px solid white;
+    z-index: 2;
+}
+.product-card-info{
+    border: 3px solid white;
+    z-index: 1;
+    background-color: var(--main-bkg-color);
+    transform: translateX(-95%);
+    transition: transform .5s ease;
+}
+.product-card-wrapper:hover .product-card-info{
+    transform: translateX(0);
 }
 .product-card{
-    width: 50%;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     row-gap: 1em;
     background-color: var(--main-bkg-color);
-    padding: 1em;
     z-index: 5;
-    box-shadow:
-  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-  0 12.5px 10px rgba(0, 0, 0, 0.06),
-  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-  0 100px 80px rgba(0, 0, 0, 0.12);
-    border-radius: 15px;
-    border: 3px solid white;
+    border-radius: 20px;
 }
 @media (max-width: 700px) {
     .product-card{
@@ -68,22 +92,26 @@
 }
 .share-link{
     user-select: none;
-    color: gray;
+    margin: .5em;
+    padding: 5px 8px 8px;
+    border-radius: 15px;
+    color: rgb(197, 197, 197);
+    background: rgba(63, 63, 63, 0.5);
     text-decoration: none;
     display: flex;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 800;
     column-gap: .3em;
     align-items: baseline;
     position: relative;
-    overflow: hidden;
+    /*overflow: hidden;
     background: linear-gradient(70deg, var(--main-green), var(--main-green) 50%, gray 50%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
     background-position: 100%;
-    transition: background-position 275ms ease;
+    transition: background-position 275ms ease;*/
 }
 .share-link:hover{
     background-position: 0 100%;
@@ -92,6 +120,53 @@
     margin: 0;
 }
 
+model-viewer::part(default-progress-mask) {
+    display: none;
+  }
+model-viewer {
+    --poster-color: transparent;
+}
+.product-card-model model-viewer{
+    max-width: 100%;
+    width: 100%;
+    height: 40vh;
+    background-image: url(../img/garage2.jpeg);
+    background-position: center;
+}
+.progress-bar {
+display: block;
+width: 33%;
+height: 10%;
+max-height: 2%;
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate3d(-50%, -50%, 0);
+border-radius: 25px;
+box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+border: 1px solid rgba(255, 255, 255, 0.9);
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar.hide {
+visibility: hidden;
+transition: visibility 0.3s;
+}
+
+.update-bar {
+background-color: rgba(255, 255, 255, 0.9);
+width: 0%;
+height: 100%;
+border-radius: 25px;
+float: left;
+transition: width 0.3s;
+}
+
+.asset-info{
+    padding: 1em;
+    width: 100%;
+    text-align: center;
+}
 .assetImage{
     max-width: 100%;
     border-radius: 5px;
@@ -101,9 +176,9 @@
 
 .owner-info{
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: space-between;
+    margin: 0 1em;
 }
 .owner-info a{
     display: flex;

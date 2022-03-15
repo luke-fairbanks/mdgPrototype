@@ -159,5 +159,8 @@ input[type=submit]:focus{
       .centered-intro p{
           width: 80%;
       }
+      .split-page{
+          margin-bottom: 3em;
+      }
 
   }

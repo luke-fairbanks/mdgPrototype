@@ -1,6 +1,7 @@
 from fileinput import filename
 
 import os
+import random
 import secrets
 
 from flask import current_app as app
@@ -13,7 +14,7 @@ from datetime import date
 
 nav = [
     {'name': 'Home', 'url': '/'},
-    {'name': 'About', 'url': '/user/luke'},
+    {'name': 'About', 'url': '/about'},
     {'name': 'Contact', 'url': '/contact'},
 ]  
 items = [
@@ -22,13 +23,18 @@ items = [
     {'title': 'test3', 'date':'04/15/2016'},
     {'title': 'test4', 'date':'01/1/2022'},
     {'title': 'test5', 'date':'12/31/2021'}
-
+]
+nft_examples = [
+    {'owner':'cruz', 'date':'today','title':'auto','img':'example-nft1.png','price':round(random.uniform(0,4),2)},
+    {'owner':'luke', 'date':'2/22/2022', 'title':'dream car','img':'','price':round(random.uniform(0,4),2)},
+    {'owner':'dade', 'date':'3/11/2022', 'title':'invest!','img':'','price':round(random.uniform(0,4),2)}
 ]
 
 @app.route('/')
 def home():
     global nav
     global items
+    global nft_examples
     auctionAssets = Asset.query.filter_by(show_on_profile=True).limit(8).all()
 
     #landing page
@@ -36,9 +42,18 @@ def home():
         'homepage.html',
         nav=nav,
         title="Digital Garage Co.",
-        description='Welcome to the gateway to your digital garage.',
+        description='Welcome to the gateway to your digital garage. Join thousands of users from all around the globe in the future of cars.',
         items=items,
-        auctionAssets=auctionAssets
+        auctionAssets=auctionAssets,
+        nft_examples = nft_examples
+    )
+
+@app.route('/about')
+def about():
+    global nav
+    return render_template(
+        'about.html',
+        nav=nav
     )
 
 @app.route('/contact', methods=['GET', 'POST'])
