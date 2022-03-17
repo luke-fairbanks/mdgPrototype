@@ -249,4 +249,8 @@ transition: width 0.3s;
         transform: translate(0);
         border-radius: 0px 0px 10px 10px;
     }
+    .product-card-wrapper:hover .product-card-info{
+        transform: translateX();
+    }
+    
 }
