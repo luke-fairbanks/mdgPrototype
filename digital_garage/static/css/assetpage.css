@@ -250,7 +250,7 @@ transition: width 0.3s;
         border-radius: 0px 0px 10px 10px;
     }
     .product-card-wrapper:hover .product-card-info{
-        transform: translateX();
+        transform: translateX(0);
     }
     
 }
