@@ -30,18 +30,11 @@
             $(".garage-door").removeClass('loaded')
             //$('.product-card-info').hide()
             });
-            $(window).focus(function(){
-            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        
-            } 
-            else{
-                if (window.innerWidth > 700){
-                $('#asset').show();
-                $(".garage-door").addClass('loaded')
-                //$('.product-card-info').show()
-                }
-            }
-            });
+        $(window).focus(function(){ 
+            $('#asset').show();
+            $(".garage-door").addClass('loaded')
+            //$('.product-card-info').show()
+        });
 
               
 

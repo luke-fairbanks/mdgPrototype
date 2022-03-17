@@ -76,10 +76,10 @@
 }
 @keyframes garage-slide-up {
     99%{
-        background-position-y: 250%;
+        background-position-y: -100vh;
     }
     100%{
-        background-position-y: 250%;
+        background-position-y: -100vh;
         display: none;
         visibility: hidden;
     }
@@ -164,6 +164,13 @@ model-viewer {
     z-index: 5;
     background-size: cover;
 }
+
+.product-card-model,
+model-viewer,
+.garage-door{
+    border-radius: 10px;
+}
+
 .progress-bar {
 display: block;
 width: 33%;
@@ -244,13 +251,20 @@ transition: width 0.3s;
 @media (max-width: 500px) {
     .product-card-info{
         bottom: -50%;
-        width: -webkit-fill-available;
+        width: calc(-webkit-fill-available + 6px);
         left: 0;
         transform: translate(0);
         border-radius: 0px 0px 10px 10px;
+        left: -3px;
+        right: -3px;
     }
     .product-card-wrapper:hover .product-card-info{
         transform: translateX(0);
+    }
+    .product-card-model,
+    model-viewer,
+    .garage-door{
+        border-radius: 10px 10px 0px 0px;
     }
     
 }
