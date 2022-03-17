@@ -35,39 +35,67 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    flex-direction: row;
+    flex-direction: column;
     width: 70%;
-    /*box-shadow:
-    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-    0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);*/
     filter: 
-    drop-shadow(0 2.8px 2.2px rgba(0, 0, 0, 0.034))
-    drop-shadow(0 6.7px 5.3px rgba(0, 0, 0, 0.048))
-    drop-shadow(0 12.5px 10px rgba(0, 0, 0, 0.06))
-    drop-shadow(0 22.3px 17.9px rgba(0, 0, 0, 0.072))
-    drop-shadow(0 41.8px 33.4px rgba(0, 0, 0, 0.086))
-    drop-shadow(0 100px 80px rgba(0, 0, 0, 0.12))
+        drop-shadow(0 2.8px 2.2px rgba(0, 0, 0, 0.034))
+        drop-shadow(0 6.7px 5.3px rgba(0, 0, 0, 0.048))
+        drop-shadow(0 12.5px 10px rgba(0, 0, 0, 0.06))
+        drop-shadow(0 22.3px 17.9px rgba(0, 0, 0, 0.072))
+        drop-shadow(0 41.8px 33.4px rgba(0, 0, 0, 0.086))
+        drop-shadow(0 100px 80px rgba(0, 0, 0, 0.12))
     ;
-    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    text-align: center;
 }
 .product-card-model{
-    width: 90%;
+    width: 100%;
+    height: 40vh;
     border: 3px solid white;
-    z-index: 2;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.product-card-model .garage-door{
+    background-image: url(../img/garage-door-dark.png);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-position-y 2s ease;
+    z-index: 10;
+}
+.garage-door.loaded{
+    animation: garage-slide-up 2s ease forwards;
+}
+@keyframes garage-slide-up {
+    99%{
+        background-position-y: 250%;
+    }
+    100%{
+        background-position-y: 250%;
+        display: none;
+        visibility: hidden;
+    }
 }
 .product-card-info{
     border: 3px solid white;
-    z-index: 1;
     background-color: var(--main-bkg-color);
-    transform: translateX(-95%);
+    transform: translateX(7%);
     transition: transform .5s ease;
+    position: absolute;
+    right: 0;
+    border-radius: 0px 10px 10px 0px;
+    padding: 1em;
 }
 .product-card-wrapper:hover .product-card-info{
-    transform: translateX(0);
+    transform: translateX(95%);
 }
 .product-card{
     display: flex;
@@ -132,6 +160,9 @@ model-viewer {
     height: 40vh;
     background-image: url(../img/garage2.jpeg);
     background-position: center;
+    position: relative;
+    z-index: 5;
+    background-size: cover;
 }
 .progress-bar {
 display: block;
@@ -146,6 +177,8 @@ border-radius: 25px;
 box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
 border: 1px solid rgba(255, 255, 255, 0.9);
 background-color: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+position: absolute;
 }
 
 .progress-bar.hide {
@@ -163,9 +196,8 @@ transition: width 0.3s;
 }
 
 .asset-info{
-    padding: 1em;
-    width: 100%;
-    text-align: center;
+    padding: .3em;
+    text-align: left;
 }
 .assetImage{
     max-width: 100%;
@@ -178,7 +210,8 @@ transition: width 0.3s;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 1em;
+    margin: 1em 0em;
+    flex-direction: column;
 }
 .owner-info a{
     display: flex;
@@ -187,9 +220,10 @@ transition: width 0.3s;
     text-decoration: none;
     align-items: center;
 }
-.owner-info p{
+.asset-info p{
     color: gray;
     margin: 0;
+    font-size: 13px;
 }
 @media (max-width: 400px) {
     .owner-info{
@@ -205,4 +239,14 @@ transition: width 0.3s;
 .owner-info h2{
     margin: 0;
     color: rgba(0, 0, 0, 0.904);
+}
+
+@media (max-width: 500px) {
+    .product-card-info{
+        bottom: -50%;
+        width: -webkit-fill-available;
+        left: 0;
+        transform: translate(0);
+        border-radius: 0px 0px 10px 10px;
+    }
 }

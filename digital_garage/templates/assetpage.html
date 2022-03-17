@@ -10,33 +10,38 @@
         //Load model viewer 
 
         const onProgress = (event) => {
-            const progressBar = event.target.querySelector('.progress-bar');
-            const updatingBar = event.target.querySelector('.update-bar');
+            const progressBar = document.querySelector('.progress-bar');
+            const updatingBar = document.querySelector('.update-bar');
             updatingBar.style.width = `${event.detail.totalProgress*100}%`;
             if (event.detail.totalProgress == 1) {
                 progressBar.classList.add('hide');
+                document.querySelector(".garage-door").classList.add('loaded')
             }
-            };
+        };
             
+        const onLoad = (event) => {
+            console.log('loaded');
+        };
         document.querySelector('#asset').addEventListener('progress', onProgress);
-
-        $('#asset').load = function(){
-            alert('hello')
-        }
+        document.querySelector('#asset').addEventListener('load', onLoad);
             
-            $(window).blur(function(){
-                $('#asset').hide();
-              });
-              $(window).focus(function(){
-                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            
-                } 
-                else{
-                  if (window.innerWidth > 700){
-                    $('#asset').show();
-                  }
+        $(window).blur(function(){
+            $('#asset').hide();
+            $(".garage-door").removeClass('loaded')
+            //$('.product-card-info').hide()
+            });
+            $(window).focus(function(){
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        
+            } 
+            else{
+                if (window.innerWidth > 700){
+                $('#asset').show();
+                $(".garage-door").addClass('loaded')
+                //$('.product-card-info').show()
                 }
-              });
+            }
+            });
 
               
 
@@ -58,7 +63,7 @@
             box.style.position = "absolute";
             box.style.left = `${randomInteger(0, 90)}%`;
             box.style.top = `${randomInteger(0, 90)}%`;
-            box.style.zIndex = index;
+            box.style.zIndex = 1;
             container.appendChild(box);
             $(box).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                 $(this).remove();
@@ -104,13 +109,18 @@ $('.share-link').on('click',function(){
 {% block pageContent %}
 <div class="container">
 <div class="product-card-wrapper">
+    <h1>{{ targetAsset.name }}</h1>
     <div class="product-card-model">
-        {#<img class="assetImage" style="background-image: url(../static/img/garage2.jpeg);" src="../static/img/cartoon-car.png" alt="Asset Image">#}
+        <!--garage door-->
+        <div class="garage-door"></div>
         <!--Model VIEWER-->
+        <div class="progress-bar" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+
         <model-viewer 
         id="asset"
         bounds="tight"
-        poster="../static/img/garage-door-dark.png"
         camera-controls
         orbit-sensitivity=".8"
         shadow-intensity="1"
@@ -121,28 +131,23 @@ $('.share-link').on('click',function(){
             <div class="share-link-wrapper">
                 <a class="share-link" href="#"><h3>Share</h3><i class="fas fa-share-square"></i></a>
             </div>
-
-            <div class="progress-bar" slot="progress-bar">
-                <div class="update-bar"></div>
-            </div>
         </model-viewer>
-    </div>
-    <div class="product-card-info">
-        <div class="asset-info">
-            <div class="owner-info" >
-                <a href="{{ url_for('profile', username= ownerUsername) }}">
-                    <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
-                    <h2>@{{ ownerUsername }}</h2>
-                </a>
+        <div class="product-card-info">
+            <div class="asset-info">
                 <p>
                     created: {{ targetAsset.date_created }}
                 </p>
+                <div class="owner-info" >
+                    <a href="{{ url_for('profile', username= ownerUsername) }}">
+                        <img class="profileImage"src="{{ ownerProfilePicture }}" alt="Profile Picture of NFT Owner">
+                        <h2>@{{ ownerUsername }}</h2>
+                    </a>
+                </div>
             </div>
-        </div>
-        <h1>{{ targetAsset.name }}</h1>
-        
+            
+        </div>    
     </div>
-</div>
+    </div>
 </div>
 
 {% endblock %}

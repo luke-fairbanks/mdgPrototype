@@ -8,24 +8,30 @@ var trashModal = document.getElementById('trash-modal');
 
 if (iconBtn != null){
     iconBtn.onclick = function() {
-        modal.style.display = "block"
+        $(modal).css("display","block")
+        $("body").css("overflow-y","hidden")
     }
 }
 if (picBtn != null){
     picBtn.onclick = function() {
-        modal.style.display = "block"
+        $(modal).css("display","block")
+        $("body").css("overflow-y","hidden")
+
     }
 }
 if (textBtn != null){
     textBtn.onclick = function(){
         //modal.style.display = "block"
         $(modal).css("display","block")
+        $("body").css("overflow-y","hidden")
+
     }
 }
 if (span != null){
     span.onclick = function() {
         modal.style.display = "none";
         trashModal.style.display = "none";
+        $("body").css("overflow-y","visible")
 
     }
 }
@@ -33,6 +39,8 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
         trashModal.style.display = "none";
+        $("body").css("overflow-y","visible")
+
 
     }
 }

@@ -99,6 +99,7 @@ body{
     overflow: auto;
     background-color: rbg(0,0,0);
     background-color: rgba(0, 0, 0, .4);
+    z-index: 101;
     
 }
 .modal-content {
@@ -269,6 +270,12 @@ textarea{
         width: 60%;
 
     }
+    fieldset{
+        margin: 1em 0;
+    }
+    .picture{
+        margin-top: 3em;
+    }
 }
 
 
@@ -403,6 +410,15 @@ textarea{
      0px 12px 17.9px rgb(0 0 0 / 7%), 
      0px 12px 33.4px rgb(0 0 0 / 9%), 
      0px 16px 80px rgb(0 0 0 / 12%);
+
+}
+@media (max-width: 700px) {
+    .trash-confirm-buttons{
+        column-gap: .1em ;
+    }
+    .confirmDelete{
+        width: auto;
+    }
 
 }
 
