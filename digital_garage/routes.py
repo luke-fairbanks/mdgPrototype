@@ -25,9 +25,9 @@ items = [
     {'title': 'test5', 'date':'12/31/2021'}
 ]
 nft_examples = [
-    {'owner':'cruz', 'date':'today','title':'auto','img':'example-nft1.png','price':round(random.uniform(0,4),2)},
-    {'owner':'luke', 'date':'2/22/2022', 'title':'dream car','img':'','price':round(random.uniform(0,4),2)},
-    {'owner':'dade', 'date':'3/11/2022', 'title':'invest!','img':'','price':round(random.uniform(0,4),2)}
+    {'id':'#000002', 'owner':'cruz', 'date':'today','title':'auto','img':'example-nft1.png','price':round(random.uniform(0,4),2)},
+    {'id':'#000001', 'owner':'luke', 'date':'2/22/2022', 'title':'dream car','img':'datsunExample.png','price':round(random.uniform(0,4),2)},
+    {'id':'#000003', 'owner':'dade', 'date':'3/11/2022', 'title':'invest!','img':'porscheExample.png','price':round(random.uniform(0,4),2)}
 ]
 
 @app.route('/')
