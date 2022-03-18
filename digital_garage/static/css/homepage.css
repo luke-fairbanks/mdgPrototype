@@ -401,10 +401,11 @@ transition: width 0.3s;
     display: flex;
     height: 40vh;
     flex-direction: row-reverse;
-    margin: 2em;
-    margin-bottom: 0;
+    margin: 2em auto 0 auto;
+    padding: 0 2em;
     align-items: center;
     flex-wrap: nowrap;
+    max-width: 1460px;
 }
 .mdg-info-wrapper p{
     font-size: 1.25em;
