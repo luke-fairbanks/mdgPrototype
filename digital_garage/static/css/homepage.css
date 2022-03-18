@@ -511,7 +511,7 @@ svg {
 }
 
 .stats-info-wrapper{
-    margin: 10vh 5vh 5vh 5vh;
+    margin: 10vh auto 5vh auto;
     display: flex;
     flex-direction: column;
     max-width: 1460px;

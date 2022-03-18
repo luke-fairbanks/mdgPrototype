@@ -175,9 +175,6 @@ html, body{
         transform: translateX(20%) scale(.9)
     
     }
-    body{
-        height: 110vh;
-    }
     
 }
 @media (max-width:600px) {
