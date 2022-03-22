@@ -82,6 +82,7 @@ transition: width 0.3s;
     flex-wrap: wrap;
     padding: 1.5em 3.5em;
     margin-bottom: 10vh;
+    padding-left: 5%;
 }
 
 .landing-split-container .left h1{
