@@ -41,7 +41,7 @@ def home():
     return render_template(
         'homepage.html',
         nav=nav,
-        title="Digital Garage Co.",
+        title="My Digital Garage",
         description='Welcome to the gateway to your digital garage. Join thousands of users from all around the globe in the future of cars.',
         items=items,
         auctionAssets=auctionAssets,
@@ -53,7 +53,8 @@ def about():
     global nav
     return render_template(
         'about.html',
-        nav=nav
+        nav=nav,
+        title="About MDG"
     )
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -165,7 +166,7 @@ def asset_page(assetId):
         return render_template(
             "assetpage.html",
             nav=nav,
-            title = "Asset "+assetId+" - Digital Garage Co.",
+            title = "Asset "+assetId+" - Digital Garage",
             targetAsset=targetAsset,
             ownerUsername= ownerUsername,
             ownerProfilePicture=ownerProfilePicture

@@ -136,13 +136,14 @@ $('#wallet-connect-btn').on('click',function(){
 */
 
 import bncOnboard from 'https://cdn.skypack.dev/bnc-onboard';
+//import Web3 from 'https://cdn.skypack.dev/web3';
 let web3;
 
 const RPC_URL = "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894"
 const APP_NAME = "MDGPrototype"
 const INFURA_KEY = "8bc341c8b6b94dd59171587ca949f894"
 
-var Web3 = window.Web3.default
+
 //var Onboard = window.bncOnboard.default
 const onboard = bncOnboard({
   dappId: '23a4ca89-79e5-435b-9dc7-ae5d1914d1b1',       // [String] The API key created by step one above
@@ -178,14 +179,15 @@ const readyToTransact = async () => {
     const ready = await onboard.walletCheck()
     return ready
   }
-$('#wallet-connect-btn').on('click', async function(){
+
+  $('#wallet-connect-btn').on('click', async function(){
     await onboard.walletSelect();
     await onboard.walletCheck();
 
 })
-$('#wallet-check-btn').on('click',function(){
+/*$('#wallet-check-btn').on('click',function(){
     onboard.walletCheck()
-})
+})*/
 
 
 //Cars traverse the bottom of the page on click 

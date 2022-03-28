@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block page_script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" integrity="sha512-/bOVV1DV1AQXcypckRwsR9ThoCj7FqTV2/0Bm79bL3YSyLkVideFLE3MIZkq1u5t28ke1c0n31WYCOrO01dsUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $('.about-card').click(function(){
         if($(window).width() < 1000){
@@ -14,11 +15,10 @@
         }
     });
     
-    $(a).click(function(e){
+    $("a").click(function(e){
         e.stopPropagation();
     })
       
-
 </script>
 {% endblock %}
 
@@ -30,10 +30,10 @@
                 <img src="../static/img/profile-images/default.jpg" alt="Profile Picture">
             </div>
         
-            <h1 class="name">Cruzito</h1>
-            <div class="title">title</div>
+            <h1 class="name">Cruz K</h1>
+            <div class="title">Founder</div>
             <div class="bio">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste rerum temporibus ut, natus harum quibusdam ducimus repellat maxime ab vel?
+                The brains of this whole operation. The only one that truly understands what is going on. Skilled in many arts and trades, and has exquisite knowledge on just about anything you can think of.
             </div>
             <div class="button-wrapper">
                 <a class="garage-btn" href="{{ url_for('profile', username='luke') }}">Cruz's Garage</a>
@@ -53,10 +53,10 @@
                 <img src="../static/img/profile-images/default.jpg" alt="Profile Picture">
             </div>
         
-            <h1 class="name">Laark</h1>
-            <div class="title">title</div>
+            <h1 class="name">Luke F</h1>
+            <div class="title">Developer, Founder</div>
             <div class="bio">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste rerum temporibus ut, natus harum quibusdam ducimus repellat maxime ab vel?
+                An aspiring Computer Scientist and Software Developer. Single handedly developed this web application at seventeen years old. Is the one writing this bio about himself ;)
             </div>
             <div class="button-wrapper">
                 <a class="garage-btn" href="{{ url_for('profile', username='luke') }}">Luke's Garage</a>
@@ -76,10 +76,10 @@
                 <img src="../static/img/profile-images/default.jpg" alt="Profile Picture">
             </div>
         
-            <h1 class="name">Dadeio</h1>
-            <div class="title">title</div>
+            <h1 class="name">Dade M</h1>
+            <div class="title">Founder</div>
             <div class="bio">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste rerum temporibus ut, natus harum quibusdam ducimus repellat maxime ab vel?
+                Avid businessman and entrepreneur. A hard worker, always pushing to get the best work out of himself and those around him. Has multiple successful companies at eighteen years old. 
             </div>
             <div class="button-wrapper">
                 <a class="garage-btn" href="{{ url_for('profile', username='luke') }}">Dade's Garage</a>

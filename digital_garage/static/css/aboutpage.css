@@ -25,6 +25,7 @@ html, body{
     margin: 3em;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .about-card-wrapper{
@@ -185,3 +186,4 @@ html, body{
         
     }
 }
+

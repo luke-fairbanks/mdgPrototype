@@ -193,7 +193,6 @@ transition: width 0.3s;
     width: 40%;
     height: 70vh;
     top: 10%;
-    position: absolute;
     right: 0;
 }
 .left,
