@@ -18,6 +18,8 @@
     $("a").click(function(e){
         e.stopPropagation();
     })
+
+    $(".bio").matchHeight();
       
 </script>
 {% endblock %}
@@ -36,7 +38,7 @@
                 The brains of this whole operation. The only one that truly understands what is going on. Skilled in many arts and trades, and has exquisite knowledge on just about anything you can think of.
             </div>
             <div class="button-wrapper">
-                <a class="garage-btn" href="{{ url_for('profile', username='luke') }}">Cruz's Garage</a>
+                <a class="garage-btn" href="{{ url_for('profile', username='cruz') }}">Cruz's Garage</a>
                 <div class="social-icons">
 
                     <a style="color: rgb(0 0 0 / 75%);;" href="#"><i class="fab fa-instagram"></i></a>
@@ -82,7 +84,7 @@
                 Avid businessman and entrepreneur. A hard worker, always pushing to get the best work out of himself and those around him. Has multiple successful companies at eighteen years old. 
             </div>
             <div class="button-wrapper">
-                <a class="garage-btn" href="{{ url_for('profile', username='luke') }}">Dade's Garage</a>
+                <a class="garage-btn" href="{{ url_for('profile', username='dade') }}">Dade's Garage</a>
                 <div class="social-icons">
 
                     <a style="color: rgb(0 0 0 / 75%);;" href="#"><i class="fab fa-instagram"></i></a>

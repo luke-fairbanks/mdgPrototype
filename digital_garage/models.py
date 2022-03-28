@@ -96,3 +96,6 @@ class Asset(db.Model):
     date_created = db.Column(db.Integer)
     show_on_profile = db.Column(db.Boolean, unique=False, default=True)
     owner_username = db.Column(db.Integer, db.ForeignKey('mdgPrototype-users.username'))
+
+    def __repr__(self):
+        return '<Asset #{}'.format(self.id)
