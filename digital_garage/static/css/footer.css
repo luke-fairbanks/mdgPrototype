@@ -4,9 +4,17 @@ footer{
     border-top: 2px solid #1A867E;
     height: 15vh;
     display: flex;
+    align-items: center;
+}
+.footer-info{
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1em 0 1em;
+    width: 85%;
+    max-width: var(--main-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 .icons i {
     font-size: 2em;
