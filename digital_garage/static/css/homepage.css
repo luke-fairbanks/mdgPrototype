@@ -82,6 +82,9 @@ transition: width 0.3s;
     padding: 1.5em 3.5em;
     margin-bottom: 5vh;
     padding-left: 5%;
+    max-width: var(--main-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .landing-split-container .left h1{
@@ -428,7 +431,7 @@ transition: width 0.3s;
     padding: 0 2em;
     align-items: center;
     flex-wrap: nowrap;
-    max-width: 1460px;
+    max-width: var(--main-max-width);
 }
 .mdg-info-wrapper p{
     font-size: 1.25em;

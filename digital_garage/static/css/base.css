@@ -2,7 +2,8 @@
 :root{
     --main-green: rgb(14, 128, 118);
     --main-bkg-color: #E7F2F1;
-    --secondary-bkg-color: #4AA099
+    --secondary-bkg-color: #4AA099;
+    --main-max-width: 1640px;
 }
 body,html {
     margin: 0;
