@@ -77,11 +77,22 @@ li {
     border-bottom: 3px solid rgb(7, 63, 58);
     transform: scaleX(0);
     transition: transform 400ms ease-in-out;
-    transform-origin: 0% 50%;
 }
 .navbar-link:hover::after{
     transform: scaleX(1)
 }
+
+.navbar-link.navRight::after{
+    transform-origin: 100% 0%;
+}
+.navbar-link.navLeft::after{
+    transform-origin: 0% 100%;
+}
+.navbar-link.navTop::after,
+.navbar-link.navBottom::after{
+    transform-origin: 50% 50%;
+}
+
 .navbar-btn{
     color: var(--main-green);
     text-decoration: none;
