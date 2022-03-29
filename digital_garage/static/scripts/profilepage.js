@@ -135,8 +135,9 @@ $('#wallet-connect-btn').on('click',function(){
 })
 */
 
+//import Web3 from 'https://esm.run/web3';
+
 import bncOnboard from 'https://cdn.skypack.dev/bnc-onboard';
-//import Web3 from 'https://cdn.skypack.dev/web3';
 let web3;
 
 const RPC_URL = "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894"

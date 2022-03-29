@@ -77,11 +77,10 @@ transition: width 0.3s;
     background-position: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 1.5em 3.5em;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
     padding-left: 5%;
 }
 
@@ -185,6 +184,7 @@ transition: width 0.3s;
 
 .landing-split-container div{
     z-index: 5;
+    top: 0;
 }
 .left{
     width: 50%;
@@ -461,6 +461,9 @@ transition: width 0.3s;
         display: none;
     }
     .nft-prototype-card-wrapper{
+        display: none;
+    }
+    .right{
         display: none;
     }
 }
