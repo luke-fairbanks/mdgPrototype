@@ -81,7 +81,7 @@ transition: width 0.3s;
     flex-wrap: wrap;
     padding: 1.5em 3.5em;
     margin-bottom: 5vh;
-    padding-left: 5%;
+    /*padding-left: 5%;*/
     max-width: var(--main-max-width);
     margin-left: auto;
     margin-right: auto;
