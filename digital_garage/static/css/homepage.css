@@ -191,7 +191,7 @@ transition: width 0.3s;
 }
 .right{
     width: 40%;
-    height: 70vh;
+    /*height: 70vh;*/
     top: 10%;
     right: 0;
 }
