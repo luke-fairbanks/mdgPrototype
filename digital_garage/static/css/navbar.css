@@ -6,6 +6,7 @@ nav {
     align-items: center;
     flex-direction: row;
     padding: 1.5em 3.5em;
+    padding-left: 5%;
     max-height: 3em;
     z-index: 100;
     background-color: transparent;
