@@ -622,6 +622,9 @@ svg {
     width: 100vw; 
     display: flex;
     align-items: center;
+    max-width: var(--main-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 .call-to-action-wrapper model-viewer{
     height: 90%;

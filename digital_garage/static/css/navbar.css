@@ -11,6 +11,9 @@ nav {
     background-color: transparent;
     user-select: none;
     width: auto;
+    max-width: var(--main-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 nav img {
