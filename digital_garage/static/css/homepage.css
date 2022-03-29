@@ -619,7 +619,7 @@ svg {
 }
 .call-to-action-wrapper{
     height: 60vh; 
-    width: 90%; 
+    width: 100vw; 
     display: flex;
     align-items: center;
     max-width: var(--main-max-width);
