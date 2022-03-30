@@ -86,7 +86,8 @@
 <header>
     <nav>
         <!--<img src="../static/img/personaluniverselogo.png">-->
-        <a href="{{ url_for('home') }}" style="text-decoration: none; color: rgba(0, 0, 0, 0.849)">
+        <a class="logo" href="{{ url_for('home') }}" style="text-decoration: none; color: rgba(0, 0, 0, 0.849)">
+            <img src="{{ url_for('static', filename='img/MDGLogo.png') }}" alt="MDG Logo">
             <h1>MDG</h1>
         </a>
 

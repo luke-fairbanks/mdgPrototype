@@ -23,6 +23,14 @@ nav img {
     object-fit: contain;
     pointer-events: none;
 }
+nav .logo{
+    display: flex;
+    align-items: center;
+    column-gap: .3em;
+}
+nav .logo img {
+    height: 40px;
+}
 nav h1{
     margin: 0
 }
