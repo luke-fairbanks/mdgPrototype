@@ -102,19 +102,33 @@ def profile(username):
     if targetUser is not None:
         if current_user.is_authenticated and current_user.username == username: 
                 canEdit = True;
+                emailCheck = True;
+                userCheck = True;
                 if form.validate_on_submit():
-                    if form.picture.data:
-                        picture_file = save_profile_picture(form.picture.data)
-                        current_user.profile_picture = picture_file
-                        print("user profile picture saved!")
-                    current_user.first = form.first.data
-                    current_user.last = form.last.data
-                    current_user.username = form.username.data
-                    current_user.email = form.email.data
-                    current_user.bio = form.bio.data
-                    db.session.commit()
-                    flash('Your account has been updated!')
-                    return redirect(url_for('profile',username=current_user.username))
+                    checkUsername = form.username.data.lower().replace(" ","")
+                    existing_email = User.query.filter_by(email=form.email.data).first()
+                    existing_user = User.query.filter_by(username=checkUsername).first()
+                    if existing_email is not None:
+                        if existing_email.email != current_user.email:
+                            flash('That email {} is already in use!'.format(existing_email.email))    
+                            emailCheck = False
+                    elif existing_user is not None:       
+                        if existing_user.username != current_user.username:
+                            flash('That username has been taken.')
+                            userCheck = False
+                    if emailCheck and userCheck:
+                        if form.picture.data:
+                            picture_file = save_profile_picture(form.picture.data)
+                            current_user.profile_picture = picture_file
+                            print("user profile picture saved!")
+                        current_user.first = form.first.data
+                        current_user.last = form.last.data
+                        current_user.username = checkUsername
+                        current_user.email = form.email.data
+                        current_user.bio = form.bio.data
+                        db.session.commit()
+                        flash('Your account has been updated!')
+                        return redirect(url_for('profile',username=current_user.username))
                 elif request.method == 'GET':
                     form.first.data = current_user.first
                     form.last.data = current_user.last

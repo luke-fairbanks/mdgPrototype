@@ -122,7 +122,7 @@ class UpdateProfileForm(FlaskForm):
     )
     email = StringField(
         'Email',
-        [ 
+        validators=[ 
             Email(message='Not a valid email address.'),
             DataRequired()
         ],render_kw={"placeholder": "email"}

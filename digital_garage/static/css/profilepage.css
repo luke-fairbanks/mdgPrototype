@@ -324,7 +324,7 @@ textarea{
     grid-column-gap: .2em;
 }
 .add-item {
-    margin: 1em;
+    margin: .5em;
     justify-content: center;
     display: flex;
     align-items: center;
