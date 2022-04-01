@@ -5,6 +5,43 @@
     <div style="text-align: center;" class="centered-intro">
         <h1>{{ title }}</h1>
         <p>This page is so empty...</p>
+        <a class='returnBtn'href="{{ url_for('home') }}">Return to MDG homepage</a>
     </div>
+{% endblock %}
 
+{% block page_css %}
+<style>
+    .returnBtn{
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+        display: inline-block;
+        padding: 5px 20px;
+        border-radius: 20px;
+        transition: 300ms ease-in-out;
+        border: none;
+        padding-bottom: 5px;
+        top: 0;
+        cursor: pointer;
+        user-select: none;
+        color: var(--main-green);
+        background-image: linear-gradient(45deg, var(--main-green) 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 400%;
+        background-color: transparent;
+        padding-bottom: 8px;
+    
+    }
+    .returnBtn:hover{
+        background-position: 0;
+        color: white;
+        box-shadow:
+        -1px -5px 2.2px rgb(0 0 0 / 3%),
+        0 6.7px 5.3px rgb(0 0 0 / 5%), 
+        0 12.5px 10px rgb(0 0 0 / 6%), 
+        0px 12px 17.9px rgb(0 0 0 / 7%), 
+        0px 12px 33.4px rgb(0 0 0 / 9%), 
+        0px 16px 80px rgb(0 0 0 / 12%);
+    }
+</style>
 {% endblock %}

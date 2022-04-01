@@ -25,8 +25,8 @@ class ProductionConfig(Config):
     FLASK_ENV = 'production'
     DEBUG = False
     TESTING = False
-    #SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
-    SQLALCHEMY_DATABASE_URI = database_file
+    SQLALCHEMY_DATABASE_URI = environ.get('PROD_DATABASE_URI')
+    #SQLALCHEMY_DATABASE_URI = database_file
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
