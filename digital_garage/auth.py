@@ -1,6 +1,5 @@
 
-from cgi import test
-from ssl import cert_time_to_seconds
+from datetime import date
 from flask import Blueprint, render_template, request, redirect, flash, request, session, url_for
 from flask_login import login_required, logout_user, current_user, login_user
 from sqlalchemy.exc import IntegrityError
@@ -15,8 +14,8 @@ auth_bp = Blueprint(
     static_folder='static'
 )
 
-def create_test_asset(owner):
-    return Asset(name="test", date_created="today",owner_username=owner)
+def create_test_asset(ownerId, ownerUsername):
+    return Asset(name="test", date_created=date.today().strftime("%B %d, %Y"), owner_id=ownerId, owner_username=ownerUsername)
 
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
@@ -27,8 +26,9 @@ def signup():
     form = SignupForm()
 
     if form.validate_on_submit():
-        existing_user = User.query.filter_by(email=form.email.data).first()
-        if existing_user is None:
+        existing_email = User.query.filter_by(email=form.email.data).first()
+        existing_username = User.query.filter_by(username=form.username.data).first()
+        if existing_username is None and existing_email is None:
             username = form.username.data.lower().replace(" ","")
             user = User(
                 first = form.first.data,
@@ -37,9 +37,14 @@ def signup():
                 email = form.email.data,
                 dateOfBirth = form.dateOfBirth.data,
             )
-            test1 = create_test_asset(username)
-            test2 = create_test_asset(username)
-            test3 = create_test_asset(username)
+            test1 = create_test_asset(user.id, user.username)
+            test2 = create_test_asset(user.id, user.username)
+            test3 = create_test_asset(user.id, user.username)
+            user.assets.append(test1)
+            user.assets.append(test2)
+            user.assets.append(test3)
+
+
             user.set_password(form.password.data)
             #try:
             db.session.add_all([user,test1,test2,test3])
@@ -51,7 +56,8 @@ def signup():
 
             login_user(user, remember=True) # immediatly logs in as this user
             return redirect(url_for('profile', username=user.username))
-        flash('A user with that email address already exists.')
+        if existing_email is not None: flash('A user with that email address already exists.')
+        elif existing_username is not None: flash('A user with that username already exists.')
     return render_template(
         'signup.html',
         title='Create an account',

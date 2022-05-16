@@ -9,7 +9,7 @@ login_manager = LoginManager()
 def create_app():
     #core application
     app = Flask(__name__, template_folder='templates')
-    app.config.from_object("config.ProductionConfig")
+    app.config.from_object("config.DevelopmentConfig")
 
     #plugins
     db.init_app(app)

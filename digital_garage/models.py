@@ -72,7 +72,9 @@ class User(UserMixin, db.Model):
         unique=False,
         nullable=True
     )
-    assets = db.relationship('Asset', backref='mdgPrototype-users')
+    #assets = db.relationship('Asset', backref='mdgPrototype-users')
+    assets = db.relationship('Asset', backref='Assets.owner_id',primaryjoin='User.id==Asset.owner_id', lazy='dynamic')
+
     """admin = db.Column(
         db.Boolean,
         index=False,
@@ -93,9 +95,11 @@ class User(UserMixin, db.Model):
 class Asset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
-    date_created = db.Column(db.Integer)
+    date_created = db.Column(db.String(30))
     show_on_profile = db.Column(db.Boolean, unique=False, default=True)
-    owner_username = db.Column(db.Integer, db.ForeignKey('mdgPrototype-users.username'))
+    owner_username = db.Column(db.Text, db.ForeignKey('mdgPrototype-users.username'), unique=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey('mdgPrototype-users.id'))
+
 
     def __repr__(self):
         return '<Asset #{}'.format(self.id)

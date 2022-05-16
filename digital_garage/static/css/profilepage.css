@@ -105,7 +105,7 @@ body{
 .modal-content {
     position: relative;
     background-color: var(--main-bkg-color);
-    margin: 10% auto;
+    margin: 1% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;

@@ -89,7 +89,10 @@ def save_profile_picture(form_picture):
     print("Picture is save at {}".format(picture_path))
     
     return picture_fn
-
+#function for updating each asset a user owns when they change their username
+def updateAssetUsername(user: User, newUsername):
+    for asset in user.assets:
+        asset.owner_username = newUsername
 
 @app.route('/user/<username>', methods=['GET', 'POST'])
 def profile(username):
@@ -121,6 +124,8 @@ def profile(username):
                             picture_file = save_profile_picture(form.picture.data)
                             current_user.profile_picture = picture_file
                             print("user profile picture saved!")
+                        if current_user.username != checkUsername:
+                            updateAssetUsername(current_user, checkUsername)
                         current_user.first = form.first.data
                         current_user.last = form.last.data
                         current_user.username = checkUsername
@@ -139,13 +144,14 @@ def profile(username):
                     errorMessage = Markup("There was an error submitting the form: <br><code>{}</code>".format(form.picture.errors))
                     flash(errorMessage)
 
-                """if assetForm.validate_on_submit():
+                if assetForm.validate_on_submit():
                     print("bruh")
                     newAsset = Asset(name="test", date_created=date.today().strftime("%m-%d-%Y"),owner_username=current_user.username)
                     db.session.add(newAsset)
-                    db.session.commit() #creates new asset"""
+                    db.session.commit() #creates new asset
 
         userProfilePicture = url_for('static',filename='img/profile-images/' + targetUser.profile_picture)
+        #userAssets = Asset.query.join(User, Asset.owner_id == User.id).filter_by(username = targetUser.username).all()
         return render_template(
             'profile.html',
             title = username+' - Digital Garage Profile',
@@ -171,12 +177,13 @@ def productPage(id):
 @app.route('/asset/<assetId>', methods=['GET', 'POST'])
 def asset_page(assetId):
     targetAsset = Asset.query.filter_by(id=assetId).first()
-    targetOwner = User.query.filter_by(username=targetAsset.owner_username).first()
+    targetOwner = User.query.filter_by(id=targetAsset.owner_id).first()
     ownerProfilePicture = url_for('static',filename='img/profile-images/' + targetOwner.profile_picture)
 
 
     if targetAsset is not None:
-        ownerUsername = targetAsset.owner_username
+        #ownerUsername = targetAsset.owner_username
+        ownerUsername = targetOwner.username
         return render_template(
             "assetpage.html",
             nav=nav,

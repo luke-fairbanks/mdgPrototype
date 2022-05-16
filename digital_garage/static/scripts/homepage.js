@@ -5,6 +5,8 @@ import { Gradient } from "https://gist.githack.com/jordienr/64bcf75f8b08641f205b
 const gradient = new Gradient();
 gradient.initGradient("#gradient-canvas");
 
+
+
 $('.nft-prototype-card').click(function(){
   var clickedButton = $(this);
   this.remove();
