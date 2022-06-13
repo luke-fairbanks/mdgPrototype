@@ -5,7 +5,6 @@ var textBtn = document.getElementById('textBtn');
 var span = document.getElementsByClassName("close")[0];
 var trashModal = document.getElementById('trash-modal');
 
-
 if (iconBtn != null){
     iconBtn.onclick = function() {
         $(modal).css("display","block")
@@ -48,7 +47,7 @@ window.onclick = function(event) {
 /*$('window').ready(function(){
     $('.card').removeClass('is-loading')
 })*/
-$('.card').on('click', function () {  
+$('.card').on('click', function () {
     $(this).toggleClass('flipped');
 });
 
@@ -96,7 +95,7 @@ $('.asset-trash').on('click', function(e){
                 console.log(result);
             }
         })
-    
+
     })
 })
 
@@ -191,7 +190,7 @@ const readyToTransact = async () => {
 })*/
 
 
-//Cars traverse the bottom of the page on click 
+//Cars traverse the bottom of the page on click
 const container = document.querySelector(".road-svg-container");
 let allEmojis = [
     "&#127950;",
@@ -227,7 +226,7 @@ function sendCar(){
 }
 function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}  
+}
 
 container.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -263,7 +262,7 @@ $(document).ready(function(){
     //check if user is on mobile. if so, do not include hover tooltip
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
-    }else{ 
+    }else{
         $('.emoji-road-wrapper').hover(function(){
             var tooltipSpan = document.getElementById('tooltip-span');
 
@@ -272,7 +271,7 @@ $(document).ready(function(){
                     y = e.clientY;
                 tooltipSpan.style.top = (y + 10) + 'px';
                 tooltipSpan.style.left = (x + 10) + 'px';
-            };    
+            };
         }, function(){
             window.onmousemove = function () {
 
