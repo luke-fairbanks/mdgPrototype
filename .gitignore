@@ -5,3 +5,15 @@ __pycache__
 # local env files
 .env.local
 .env.*.local
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Python
+__pycache__
+venv
+*.pyc
+
+# macOs
+.DS_Store
