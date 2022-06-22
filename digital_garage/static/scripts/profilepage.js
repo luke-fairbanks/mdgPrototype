@@ -136,55 +136,55 @@ $('#wallet-connect-btn').on('click',function(){
 
 //import Web3 from 'https://esm.run/web3';
 
-import bncOnboard from 'https://cdn.skypack.dev/bnc-onboard';
-let web3;
+//NOTE: bncOnboard import not working properly
 
-const RPC_URL = "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894"
-const APP_NAME = "MDGPrototype"
-const INFURA_KEY = "8bc341c8b6b94dd59171587ca949f894"
+// import bncOnboard from 'https://cdn.skypack.dev/bnc-onboard';
+// let web3;
 
+// const RPC_URL = "wss://mainnet.infura.io/ws/v3/8bc341c8b6b94dd59171587ca949f894"
+// const APP_NAME = "MDGPrototype"
+// const INFURA_KEY = "8bc341c8b6b94dd59171587ca949f894"
 
-//var Onboard = window.bncOnboard.default
-const onboard = bncOnboard({
-  dappId: '23a4ca89-79e5-435b-9dc7-ae5d1914d1b1',       // [String] The API key created by step one above
-  networkId: 1,  // [Integer] The Ethereum network ID your Dapp uses.
-  subscriptions: {
-    wallet: wallet => {
-       web3 = new Web3(wallet.provider)
-       console.log(`${wallet.name} is now connected!`)
-    }
-  },
-  walletSelect: {
-      wallets: [
-        //{ walletName: "coinbase", preferred: true },
-        { walletName: "trust", preferred: true, rpcUrl: RPC_URL, },
-        { walletName: "metamask", preferred: true },
-        { walletName: "authereum" },
-        { walletName: "walletLink", rpcUrl: RPC_URL, appName: APP_NAME, preferred: true },
-        {
-            walletName: "walletConnect",
-            infuraKey: INFURA_KEY,
-            preferred: true
-          },
-        ]
-  }
-});
+// const onboard = bncOnboard({
+//   dappId: '23a4ca89-79e5-435b-9dc7-ae5d1914d1b1',       // [String] The API key created by step one above
+//   networkId: 1,  // [Integer] The Ethereum network ID your Dapp uses.
+//   subscriptions: {
+//     wallet: wallet => {
+//        web3 = new Web3(wallet.provider)
+//        console.log(`${wallet.name} is now connected!`)
+//     }
+//   },
+//   walletSelect: {
+//       wallets: [
+//         //{ walletName: "coinbase", preferred: true },
+//         { walletName: "trust", preferred: true, rpcUrl: RPC_URL, },
+//         { walletName: "metamask", preferred: true },
+//         { walletName: "authereum" },
+//         { walletName: "walletLink", rpcUrl: RPC_URL, appName: APP_NAME, preferred: true },
+//         {
+//             walletName: "walletConnect",
+//             infuraKey: INFURA_KEY,
+//             preferred: true
+//           },
+//         ]
+//   }
+// });
 
-const readyToTransact = async () => {
-    if (!provider) {
-      const walletSelected = await onboard.walletSelect()
-      if (!walletSelected) return false
-    }
+// const readyToTransact = async () => {
+//     if (!provider) {
+//       const walletSelected = await onboard.walletSelect()
+//       if (!walletSelected) return false
+//     }
 
-    const ready = await onboard.walletCheck()
-    return ready
-  }
+//     const ready = await onboard.walletCheck()
+//     return ready
+//   }
 
-  $('#wallet-connect-btn').on('click', async function(){
-    await onboard.walletSelect();
-    await onboard.walletCheck();
+//   $('#wallet-connect-btn').on('click', async function(){
+//     await onboard.walletSelect();
+//     await onboard.walletCheck();
 
-})
+// })
 /*$('#wallet-check-btn').on('click',function(){
     onboard.walletCheck()
 })*/
